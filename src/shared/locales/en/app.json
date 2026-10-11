@@ -35,7 +35,7 @@
     "select": "Click selects a shape. Drag moves it, Shift selects several, a frame selects many.",
     "rect": "Drag to draw a rectangle. Hold Shift for a square.",
     "ellipse": "Drag to draw an ellipse. Hold Shift for a circle.",
-    "polygon": "Click point by point. Double-click closes the polygon, Esc cancels.",
+    "polygon": "Click point by point. To close, click the first corner (or double-click). Esc cancels.",
     "freehand": "Drag to draw freely. The line becomes a smooth path."
   },
   "props": {
@@ -63,7 +63,13 @@
     "subtractTip": "The lower shape without the upper one",
     "excludeTip": "Only the outer parts, without the overlap"
   },
-  "zoom": { "in": "Zoom in", "out": "Zoom out", "reset": "100 %", "resetTip": "Reset zoom to 100 %", "level": "Zoom {percent} %" },
+  "zoom": {
+    "in": "Zoom in",
+    "out": "Zoom out",
+    "reset": "100 %",
+    "resetTip": "Reset zoom to 100 %",
+    "level": "Zoom {percent} %"
+  },
   "canvas": "Drawing area",
   "selectionBox": "Selection frame",
   "start": {
@@ -74,7 +80,10 @@
     "open": "Open SVG file",
     "close": "Close"
   },
-  "split": { "handle": "Divider between drawing and source", "hint": "Move with the arrow keys" },
+  "split": {
+    "handle": "Divider between drawing and source",
+    "hint": "Move with the arrow keys"
+  },
   "warn": {
     "title": "Notice while opening",
     "script": "Scripts were removed.",

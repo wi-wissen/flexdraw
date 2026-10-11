@@ -222,6 +222,11 @@ export default defineComponent({
           break
         case 'polygon': {
           const q = this.snap(p)
+          // Clicking the first corner closes the polygon.
+          if (st.polygon.length >= 3 && this.nearFirstCorner(p)) {
+            this.finishPolygon()
+            return
+          }
           st.polygon = [...st.polygon, q]
           st.hover = q
           this.draftLine = [...st.polygon]
@@ -336,6 +341,11 @@ export default defineComponent({
     },
     onDblClick() {
       if (this.tool === 'polygon') this.finishPolygon()
+    },
+    /** True when the point is within ~12 screen pixels of the polygon's first corner. */
+    nearFirstCorner(p: Point): boolean {
+      const first = this.state().polygon[0]
+      return !!first && Math.hypot(p.x - first.x, p.y - first.y) * this.zoom <= 12
     },
     finishPolygon() {
       const st = this.state()
@@ -459,7 +469,12 @@ export default defineComponent({
         <rect v-if="draft && draft.kind === 'rect'" :x="draft.x" :y="draft.y" :width="draft.width" :height="draft.height" :fill="draft.fill" :stroke="draft.stroke" :stroke-width="draft.strokeWidth" opacity="0.7" />
         <ellipse v-if="draft && draft.kind === 'ellipse'" :cx="draft.cx" :cy="draft.cy" :rx="draft.rx" :ry="draft.ry" :fill="draft.fill" :stroke="draft.stroke" :stroke-width="draft.strokeWidth" opacity="0.7" />
         <polyline v-if="draftLine.length" :points="draftPoints" fill="none" stroke="#2ec4b6" :stroke-width="2 / zoom" :stroke-dasharray="`${6 / zoom} ${4 / zoom}`" />
-        <rect v-for="(p, i) in tool === 'polygon' ? draftLine : []" :key="'v' + i" :x="p.x - hs / 2" :y="p.y - hs / 2" :width="hs" :height="hs" fill="#2ec4b6" />
+        <rect
+          v-for="(p, i) in tool === 'polygon' ? draftLine : []" :key="'v' + i" data-testid="polygon-corner"
+          :x="p.x - (i === 0 && draftLine.length > 3 ? hs : hs / 2)" :y="p.y - (i === 0 && draftLine.length > 3 ? hs : hs / 2)"
+          :width="i === 0 && draftLine.length > 3 ? hs * 2 : hs" :height="i === 0 && draftLine.length > 3 ? hs * 2 : hs"
+          :fill="i === 0 && draftLine.length > 3 ? '#ffc93c' : '#2ec4b6'" :stroke="i === 0 ? '#0f172a' : 'none'" :stroke-width="2 / zoom"
+        />
 
         <rect v-if="marquee" :x="marquee.x" :y="marquee.y" :width="marquee.width" :height="marquee.height" fill="#2ec4b6" fill-opacity="0.12" stroke="#2ec4b6" :stroke-width="1.5 / zoom" :stroke-dasharray="`${5 / zoom} ${3 / zoom}`" />
 

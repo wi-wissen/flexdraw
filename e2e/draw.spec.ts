@@ -180,3 +180,22 @@ test('resize, rotate with handles; marquee and shift multi-select', async ({ pag
   await page.mouse.up()
   await expect(first).toHaveAttribute('transform', /rotate\(/)
 })
+
+test('polygon closes by clicking the first corner, and with Enter', async ({ page }) => {
+  await page.getByTestId('tool-polygon').click()
+  const box = (await page.getByTestId('canvas').boundingBox())!
+  const pts: [number, number][] = [[200, 200], [320, 200], [340, 300], [260, 340]]
+  for (const [x, y] of pts) await page.mouse.click(box.x + x, box.y + y)
+  await expect(page.locator('[data-shape=polygon]')).toHaveCount(0)
+  await page.mouse.click(box.x + 203, box.y + 198) // near the first corner
+  await expect(page.locator('[data-shape=polygon]')).toHaveCount(1)
+  expect((await page.locator('[data-shape=polygon]').getAttribute('points'))!.split(' ')).toHaveLength(4)
+  // Enter closes too
+  for (const [x, y] of [[500, 200], [600, 200], [550, 300]] as [number, number][]) await page.mouse.click(box.x + x, box.y + y)
+  await page.keyboard.press('Enter')
+  await expect(page.locator('[data-shape=polygon]')).toHaveCount(2)
+  // a triangle can be closed on its first corner as well
+  for (const [x, y] of [[600, 400], [700, 400], [650, 480]] as [number, number][]) await page.mouse.click(box.x + x, box.y + y)
+  await page.mouse.click(box.x + 600, box.y + 400)
+  await expect(page.locator('[data-shape=polygon]')).toHaveCount(3)
+})

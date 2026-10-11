@@ -35,7 +35,7 @@
     "select": "Klicken wählt eine Form. Ziehen verschiebt sie, Umschalt wählt mehrere, ein Rahmen wählt viele.",
     "rect": "Ziehen zeichnet ein Rechteck. Mit Umschalt wird es ein Quadrat.",
     "ellipse": "Ziehen zeichnet eine Ellipse. Mit Umschalt wird es ein Kreis.",
-    "polygon": "Klicke Punkt für Punkt. Doppelklick schließt das Vieleck, Esc bricht ab.",
+    "polygon": "Klicke Punkt für Punkt. Zum Schließen klickst du die erste Ecke an (oder Doppelklick). Esc bricht ab.",
     "freehand": "Ziehen zeichnet frei. Die Linie wird zu einem glatten Pfad."
   },
   "props": {
@@ -63,7 +63,13 @@
     "subtractTip": "Die untere Form ohne die obere",
     "excludeTip": "Nur das Äußere, ohne die Überschneidung"
   },
-  "zoom": { "in": "Vergrößern", "out": "Verkleinern", "reset": "100 %", "resetTip": "Zoom auf 100 % setzen", "level": "Zoom {percent} %" },
+  "zoom": {
+    "in": "Vergrößern",
+    "out": "Verkleinern",
+    "reset": "100 %",
+    "resetTip": "Zoom auf 100 % setzen",
+    "level": "Zoom {percent} %"
+  },
   "canvas": "Zeichenfläche",
   "selectionBox": "Auswahlrahmen",
   "start": {
@@ -74,7 +80,10 @@
     "open": "SVG-Datei öffnen",
     "close": "Schließen"
   },
-  "split": { "handle": "Trenner zwischen Zeichnung und Quelltext", "hint": "Mit den Pfeiltasten verschieben" },
+  "split": {
+    "handle": "Trenner zwischen Zeichnung und Quelltext",
+    "hint": "Mit den Pfeiltasten verschieben"
+  },
   "warn": {
     "title": "Hinweis beim Öffnen",
     "script": "Skripte wurden entfernt.",
