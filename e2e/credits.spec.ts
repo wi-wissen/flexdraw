@@ -22,3 +22,24 @@ test('help page has the footer, no SQL block, the anatomy section and the freesv
   const tops = await page.locator('.help-step').evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)))
   expect(new Set(tops).size).toBe(2)
 })
+
+test('landing, help and credits share one identical footer', async ({ page }) => {
+  const seen: { text: string; links: string[]; height: number }[] = []
+  for (const path of ['/', '/help/', '/credits/']) {
+    await page.addInitScript(() => localStorage.setItem('flexdraw.lang', 'de'))
+    await page.goto(path)
+    const footer = page.locator('footer.fd-footer')
+    await expect(footer).toBeVisible()
+    seen.push({
+      text: (await footer.innerText()).replace(/\s+/g, ' '),
+      links: await footer.locator('a').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).pathname + (a as HTMLAnchorElement).host)),
+      height: Math.round((await footer.boundingBox())!.height),
+    })
+  }
+  expect(seen[1]!.text).toBe(seen[0]!.text)
+  expect(seen[2]!.text).toBe(seen[0]!.text)
+  expect(seen[1]!.links).toEqual(seen[0]!.links)
+  expect(seen[2]!.links).toEqual(seen[0]!.links)
+  expect(seen[1]!.height).toBe(seen[0]!.height)
+  expect(seen[2]!.height).toBe(seen[0]!.height)
+})

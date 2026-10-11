@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import AppFooter from '../shared/components/AppFooter.vue'
 import AppHeader from '../shared/components/AppHeader.vue'
 import { APP_NAME } from '../shared/config'
 import LpIcon from './components/LpIcon.vue'
@@ -29,7 +30,7 @@ type Media = { matches: boolean; addEventListener?: (t: 'change', cb: () => void
 
 export default defineComponent({
   name: 'LandingPage',
-  components: { AppHeader, LpIcon, LiveDemo, BgShapes, BoolCard },
+  components: { AppHeader, AppFooter, LpIcon, LiveDemo, BgShapes, BoolCard },
   data() {
     const words = APP_NAME.split(' ')
     return {
@@ -347,21 +348,6 @@ export default defineComponent({
       </section>
     </main>
 
-    <footer class="lp-footer">
-      <div class="lp-wrap lp-footer-inner">
-        <div>
-          <p class="lp-footer-brand">{{ appName }}</p>
-          <p>{{ $t('landing.footer.about') }}</p>
-          <p class="lp-footer-small">{{ $t('landing.footer.license') }} · {{ $t('landing.footer.made') }}</p>
-        </div>
-        <nav class="lp-footer-links" :aria-label="appName">
-          <a class="nb-btn" href="./help/"><LpIcon name="help" />{{ $t('landing.footer.help') }}</a>
-          <a class="nb-btn" href="./credits/" data-testid="footer-credits"><LpIcon name="credits" />{{ $t('landing.footer.credits') }}</a>
-          <a class="nb-btn" :href="githubUrl" target="_blank" rel="noopener noreferrer" data-testid="footer-github">
-            <LpIcon name="github" />{{ $t('landing.footer.github') }}<span class="sr-only"> {{ $t('landing.newTab') }}</span>
-          </a>
-        </nav>
-      </div>
-    </footer>
+    <AppFooter base="./" />
   </div>
 </template>

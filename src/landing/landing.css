@@ -377,16 +377,6 @@
 .lp-cta .nb-btn:not(.lp-btn-ink) { background: #f7f7f2; color: var(--lp-ink); }
 
 /* footer */
-.lp-footer { background: var(--panel); padding: 2.5rem 0 3rem; }
-.lp-footer-inner { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; align-items: flex-start; }
-.lp-footer p { margin: 0.35rem 0 0; }
-.lp-footer-brand {
-  display: inline-block; font-size: 1.6rem; font-weight: 700; padding: 0 0.4rem; background: var(--primary); color: var(--lp-ink);
-  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--shadow); transform: rotate(-2deg);
-}
-.lp-footer-small { font-size: 0.95rem; }
-.lp-footer-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-
 /* ================= scroll reveal ("stamp in") ================= */
 .lp-anim .lp-reveal:not(.is-in) { opacity: 0; }
 .lp-anim .lp-reveal.is-in { animation: lp-stamp-in 0.7s cubic-bezier(0.2, 1.35, 0.4, 1) backwards; animation-delay: calc(var(--stagger, 0) * 90ms); }

@@ -16,6 +16,10 @@
   "home": "Home",
   "skip": "Skip to content",
   "credits": "Credits",
-  "github": "GitHub",
-  "footer": "More pages"
+  "github": "View on GitHub",
+  "footer": "More pages",
+  "newTab": "(opens in a new tab)",
+  "footerAbout": "A small SVG editor for computer science lessons.",
+  "footerSource": "Source code public on GitHub",
+  "footerMade": "Made for curious kids and their teachers."
 }

@@ -153,14 +153,6 @@
     "title": "Ready? Draw your first SVG.",
     "text": "It opens straight away – no install, no account."
   },
-  "footer": {
-    "about": "A small SVG editor for computer science lessons.",
-    "help": "Help",
-    "credits": "Credits",
-    "github": "View on GitHub",
-    "license": "Source code public on GitHub",
-    "made": "Made for curious kids and their teachers."
-  },
   "howto": "How it works",
   "curious": {
     "title": "Curious how it all works?",

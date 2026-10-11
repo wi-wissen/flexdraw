@@ -153,14 +153,6 @@
     "title": "Bereit? Zeichne dein erstes SVG.",
     "text": "Es geht sofort los – ohne Installation, ohne Konto."
   },
-  "footer": {
-    "about": "Ein kleiner SVG-Editor für den Informatikunterricht.",
-    "help": "Hilfe",
-    "credits": "Credits",
-    "github": "Auf GitHub ansehen",
-    "license": "Quelltext öffentlich auf GitHub",
-    "made": "Gemacht für neugierige Schüler:innen und ihre Lehrer:innen."
-  },
   "howto": "So geht’s",
   "curious": {
     "title": "Neugierig, wie alles funktioniert?",

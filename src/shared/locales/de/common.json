@@ -16,6 +16,10 @@
   "home": "Startseite",
   "skip": "Zum Inhalt springen",
   "credits": "Credits",
-  "github": "GitHub",
-  "footer": "Weitere Seiten"
+  "github": "Auf GitHub ansehen",
+  "footer": "Weitere Seiten",
+  "newTab": "(öffnet in neuem Tab)",
+  "footerAbout": "Ein kleiner SVG-Editor für den Informatikunterricht.",
+  "footerSource": "Quelltext öffentlich auf GitHub",
+  "footerMade": "Gemacht für neugierige Schüler:innen und ihre Lehrer:innen."
 }
