@@ -96,3 +96,21 @@ test('clicking a shape marks its source line and clicking a line selects the sha
   expect(mouthSel).not.toBeNull()
   expect(canvas.width).toBeGreaterThan(0)
 })
+
+test('clicking the svg wrapper lines clears the selection', async ({ page }) => {
+  await page.getByTestId('act-new').click()
+  await page.getByTestId('start-smiley').click()
+  await page.getByTestId('view-split').click()
+  const input = (await page.getByTestId('source-input').boundingBox())!
+  const lh = 1.35 * 16
+  const lineY = (n: number) => input.y + 12 + (n - 0.5) * lh // 0.75rem padding
+  await page.mouse.click(input.x + 60, lineY(3)) // an element line
+  await expect(page.getByTestId('source-band')).toHaveCount(1)
+  await page.mouse.click(input.x + 60, lineY(1)) // <svg ...>
+  await expect(page.getByTestId('source-band')).toHaveCount(0)
+  await page.mouse.click(input.x + 60, lineY(4))
+  await expect(page.getByTestId('source-band')).toHaveCount(1)
+  await page.mouse.click(input.x + 60, lineY(6)) // </svg>
+  await expect(page.getByTestId('source-band')).toHaveCount(0)
+  await expect(page.getByTestId('selection')).toHaveCount(0)
+})

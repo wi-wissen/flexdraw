@@ -120,7 +120,10 @@ export default defineComponent({
     /** Clicking a source line selects the shape that line describes. */
     onCaretLine(line: number) {
       const id = this.editor.shapeAtLine(line)
-      if (id && !(this.editor.selection.length === 1 && this.editor.selection[0] === id)) this.editor.select([id])
+      if (!id) {
+        // Lines like <svg> and </svg> belong to no shape: drop the selection.
+        if (this.editor.selection.length) this.editor.clearSelection()
+      } else if (!(this.editor.selection.length === 1 && this.editor.selection[0] === id)) this.editor.select([id])
     },
     onSourceEdit(text: string) {
       this.sourceText = text
