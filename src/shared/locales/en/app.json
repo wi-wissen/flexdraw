@@ -1,0 +1,91 @@
+{
+  "views": {
+    "label": "View",
+    "draw": "Drawing",
+    "split": "Drawing + source",
+    "code": "Source",
+    "drawTip": "Only the drawing area",
+    "splitTip": "Drawing and source code side by side",
+    "codeTip": "Only the source code, large"
+  },
+  "actions": {
+    "label": "Actions",
+    "new": "New",
+    "newTip": "Start a new, empty drawing",
+    "open": "Open",
+    "openTip": "Open an SVG file",
+    "download": "Download SVG",
+    "downloadTip": "Save the SVG file",
+    "downloadEmpty": "Draw something first, then you can download it",
+    "undo": "Undo",
+    "undoNone": "There is nothing to undo",
+    "redo": "Redo",
+    "redoNone": "There is nothing to redo",
+    "confirmNew": "The current drawing will be lost. Really start over?"
+  },
+  "tools": {
+    "label": "Tools",
+    "select": "Select",
+    "rect": "Rectangle",
+    "ellipse": "Ellipse",
+    "polygon": "Polygon",
+    "freehand": "Freehand"
+  },
+  "hint": {
+    "select": "Click selects a shape. Drag moves it, Shift selects several, a frame selects many.",
+    "rect": "Drag to draw a rectangle. Hold Shift for a square.",
+    "ellipse": "Drag to draw an ellipse. Hold Shift for a circle.",
+    "polygon": "Click point by point. Double-click closes the polygon, Esc cancels.",
+    "freehand": "Drag to draw freely. The line becomes a smooth path."
+  },
+  "props": {
+    "label": "Properties",
+    "fill": "Fill",
+    "stroke": "Stroke",
+    "strokeWidth": "Stroke width",
+    "selection": "Selection",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "selectFirst": "Select a shape first",
+    "order": "Order",
+    "front": "Bring to front",
+    "forward": "Forward one",
+    "backward": "Back one",
+    "back": "Send to back",
+    "combine": "Combine",
+    "unite": "Unite",
+    "intersect": "Intersect",
+    "subtract": "Subtract",
+    "exclude": "Exclude",
+    "needTwo": "Select two shapes first",
+    "uniteTip": "Everything together",
+    "intersectTip": "Only the shared part",
+    "subtractTip": "The lower shape without the upper one",
+    "excludeTip": "Only the outer parts, without the overlap"
+  },
+  "zoom": { "in": "Zoom in", "out": "Zoom out", "reset": "100 %", "resetTip": "Reset zoom to 100 %", "level": "Zoom {percent} %" },
+  "canvas": "Drawing area",
+  "selectionBox": "Selection frame",
+  "start": {
+    "title": "Welcome to {name}",
+    "text": "How do you want to start?",
+    "empty": "Empty drawing",
+    "smiley": "Load smiley template",
+    "open": "Open SVG file",
+    "close": "Close"
+  },
+  "split": { "handle": "Divider between drawing and source", "hint": "Move with the arrow keys" },
+  "warn": {
+    "title": "Notice while opening",
+    "script": "Scripts were removed.",
+    "external": "Images and external references were removed.",
+    "text": "Text is not supported and was ignored.",
+    "gradient": "Gradients are not supported and were replaced with grey.",
+    "filter": "Filters are not supported and were ignored.",
+    "style": "Style sheets are not supported and were ignored.",
+    "color": "An unknown colour was replaced with black.",
+    "unsupported": "Unsupported parts were ignored.",
+    "dismiss": "Dismiss notice"
+  },
+  "openError": "The file could not be opened: {message}"
+}

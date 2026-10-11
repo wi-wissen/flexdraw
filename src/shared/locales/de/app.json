@@ -1,0 +1,91 @@
+{
+  "views": {
+    "label": "Ansicht",
+    "draw": "Zeichnung",
+    "split": "Zeichnung + Quelltext",
+    "code": "Quelltext",
+    "drawTip": "Nur die Zeichenfläche",
+    "splitTip": "Zeichnung und Quelltext nebeneinander",
+    "codeTip": "Nur der Quelltext, groß"
+  },
+  "actions": {
+    "label": "Aktionen",
+    "new": "Neu",
+    "newTip": "Neue, leere Zeichnung beginnen",
+    "open": "Öffnen",
+    "openTip": "SVG-Datei öffnen",
+    "download": "SVG herunterladen",
+    "downloadTip": "SVG-Datei speichern",
+    "downloadEmpty": "Zeichne zuerst etwas, dann kannst du es herunterladen",
+    "undo": "Rückgängig",
+    "undoNone": "Es gibt nichts zum Rückgängigmachen",
+    "redo": "Wiederholen",
+    "redoNone": "Es gibt nichts zum Wiederholen",
+    "confirmNew": "Die aktuelle Zeichnung geht verloren. Wirklich neu beginnen?"
+  },
+  "tools": {
+    "label": "Werkzeuge",
+    "select": "Auswählen",
+    "rect": "Rechteck",
+    "ellipse": "Ellipse",
+    "polygon": "Vieleck",
+    "freehand": "Freihand"
+  },
+  "hint": {
+    "select": "Klicken wählt eine Form. Ziehen verschiebt sie, Umschalt wählt mehrere, ein Rahmen wählt viele.",
+    "rect": "Ziehen zeichnet ein Rechteck. Mit Umschalt wird es ein Quadrat.",
+    "ellipse": "Ziehen zeichnet eine Ellipse. Mit Umschalt wird es ein Kreis.",
+    "polygon": "Klicke Punkt für Punkt. Doppelklick schließt das Vieleck, Esc bricht ab.",
+    "freehand": "Ziehen zeichnet frei. Die Linie wird zu einem glatten Pfad."
+  },
+  "props": {
+    "label": "Eigenschaften",
+    "fill": "Füllung",
+    "stroke": "Kontur",
+    "strokeWidth": "Konturdicke",
+    "selection": "Auswahl",
+    "duplicate": "Duplizieren",
+    "delete": "Löschen",
+    "selectFirst": "Wähle zuerst eine Form aus",
+    "order": "Reihenfolge",
+    "front": "Ganz nach vorne",
+    "forward": "Eins nach vorne",
+    "backward": "Eins nach hinten",
+    "back": "Ganz nach hinten",
+    "combine": "Überlagern",
+    "unite": "Vereinigen",
+    "intersect": "Schnittmenge",
+    "subtract": "Abziehen",
+    "exclude": "Ausschließen",
+    "needTwo": "Wähle zuerst zwei Formen aus",
+    "uniteTip": "Alles zusammen",
+    "intersectTip": "Nur das Gemeinsame",
+    "subtractTip": "Die untere Form ohne die obere",
+    "excludeTip": "Nur das Äußere, ohne die Überschneidung"
+  },
+  "zoom": { "in": "Vergrößern", "out": "Verkleinern", "reset": "100 %", "resetTip": "Zoom auf 100 % setzen", "level": "Zoom {percent} %" },
+  "canvas": "Zeichenfläche",
+  "selectionBox": "Auswahlrahmen",
+  "start": {
+    "title": "Willkommen bei {name}",
+    "text": "Womit möchtest du anfangen?",
+    "empty": "Leere Zeichnung",
+    "smiley": "Smiley-Vorlage laden",
+    "open": "SVG-Datei öffnen",
+    "close": "Schließen"
+  },
+  "split": { "handle": "Trenner zwischen Zeichnung und Quelltext", "hint": "Mit den Pfeiltasten verschieben" },
+  "warn": {
+    "title": "Hinweis beim Öffnen",
+    "script": "Skripte wurden entfernt.",
+    "external": "Bilder und externe Verweise wurden entfernt.",
+    "text": "Text wird nicht unterstützt und wurde ignoriert.",
+    "gradient": "Verläufe werden nicht unterstützt und wurden grau ersetzt.",
+    "filter": "Filter werden nicht unterstützt und wurden ignoriert.",
+    "style": "Stylesheets werden nicht unterstützt und wurden ignoriert.",
+    "color": "Eine unbekannte Farbe wurde durch Schwarz ersetzt.",
+    "unsupported": "Nicht unterstützte Teile wurden ignoriert.",
+    "dismiss": "Hinweis schließen"
+  },
+  "openError": "Die Datei konnte nicht geöffnet werden: {message}"
+}

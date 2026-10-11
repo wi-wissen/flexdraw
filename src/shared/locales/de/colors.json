@@ -1,0 +1,31 @@
+{
+  "family": {
+    "red": "Rot",
+    "orange": "Orange",
+    "amber": "Bernstein",
+    "yellow": "Gelb",
+    "lime": "Limette",
+    "green": "Grün",
+    "teal": "Blaugrün",
+    "cyan": "Cyan",
+    "sky": "Himmelblau",
+    "blue": "Blau",
+    "indigo": "Indigo",
+    "violet": "Violett",
+    "purple": "Lila",
+    "pink": "Pink",
+    "rose": "Rosé",
+    "slate": "Schiefer",
+    "stone": "Stein"
+  },
+  "black": "Schwarz",
+  "white": "Weiß",
+  "swatch": "{name} {shade}",
+  "picker": {
+    "palette": "Farbpalette",
+    "none": "keine",
+    "hex": "Hex-Code",
+    "placeholder": "#rrggbb",
+    "hexError": "Ungültiger Hex-Code. Erlaubt sind 3 oder 6 Ziffern von 0 bis 9 und a bis f, mit oder ohne #."
+  }
+}

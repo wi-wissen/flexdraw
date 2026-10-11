@@ -1,0 +1,15 @@
+{
+  "label": "Source code",
+  "ariaLabel": "Edit SVG source code",
+  "hint": "Esc leaves the editor",
+  "line": "line {line}",
+  "errors": {
+    "syntax": "The SVG text is malformed and cannot be read.",
+    "notSvg": "This document is not SVG. The root element svg is missing.",
+    "empty": "The source code is empty.",
+    "unclosedComment": "A comment was not closed.",
+    "mismatchedTag": "The closing tag does not match the opening tag “{tag}”.",
+    "unclosedTag": "The tag “{tag}” was not closed.",
+    "badAttribute": "An attribute in the tag “{tag}” is invalid."
+  }
+}

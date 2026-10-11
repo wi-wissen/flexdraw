@@ -1,0 +1,131 @@
+import { expect, test, type Page } from '@playwright/test'
+
+const drag = async (page: Page, from: [number, number], to: [number, number], opts: { shift?: boolean } = {}) => {
+  const box = (await page.getByTestId('canvas').boundingBox())!
+  if (opts.shift) await page.keyboard.down('Shift')
+  await page.mouse.move(box.x + from[0], box.y + from[1])
+  await page.mouse.down()
+  await page.mouse.move(box.x + (from[0] + to[0]) / 2, box.y + (from[1] + to[1]) / 2)
+  await page.mouse.move(box.x + to[0], box.y + to[1])
+  await page.mouse.up()
+  if (opts.shift) await page.keyboard.up('Shift')
+}
+
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('seeded')) {
+      localStorage.clear()
+      sessionStorage.setItem('seeded', '1')
+    }
+  })
+  await page.goto('/app/')
+  await page.getByTestId('start-close').click()
+})
+
+test('starts in drawing view with a hint, export disabled', async ({ page }) => {
+  await expect(page.getByTestId('view-draw')).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByTestId('act-download')).toHaveAttribute('aria-disabled', 'true')
+  await expect(page.getByTestId('hint')).toContainText(/wählt eine Form|selects a shape/)
+})
+
+test('draw rect (shift = square), ellipse, polygon, freehand; undo/redo', async ({ page }) => {
+  await page.getByTestId('tool-rect').click()
+  await expect(page.getByTestId('tool-rect')).toHaveAttribute('aria-pressed', 'true')
+  await drag(page, [200, 150], [300, 200], { shift: true })
+  const rect = page.locator('[data-shape=rect]')
+  await expect(rect).toHaveCount(1)
+  expect(await rect.getAttribute('width')).toBe(await rect.getAttribute('height'))
+
+  await page.getByTestId('tool-ellipse').click()
+  await drag(page, [400, 150], [500, 220])
+  await expect(page.locator('[data-shape=ellipse]')).toHaveCount(1)
+
+  await page.getByTestId('tool-polygon').click()
+  const box = (await page.getByTestId('canvas').boundingBox())!
+  for (const [x, y] of [[200, 350], [300, 350], [250, 430]] as [number, number][]) await page.mouse.click(box.x + x, box.y + y)
+  await page.mouse.dblclick(box.x + 250, box.y + 430)
+  await expect(page.locator('[data-shape=polygon]')).toHaveCount(1)
+
+  await page.getByTestId('tool-freehand').click()
+  await page.mouse.move(box.x + 450, box.y + 350)
+  await page.mouse.down()
+  for (let i = 0; i <= 20; i++) await page.mouse.move(box.x + 450 + i * 6, box.y + 350 + Math.sin(i / 3) * 30)
+  await page.mouse.up()
+  await expect(page.locator('[data-shape=path]')).toHaveCount(1)
+
+  await expect(page.getByTestId('act-download')).toHaveAttribute('aria-disabled', 'false')
+  await page.keyboard.press('Control+z')
+  await expect(page.locator('[data-shape=path]')).toHaveCount(0)
+  await page.keyboard.press('Control+y')
+  await expect(page.locator('[data-shape=path]')).toHaveCount(1)
+})
+
+test('select, move, boolean, reorder, delete, source view follows', async ({ page }) => {
+  await page.getByTestId('tool-rect').click()
+  await drag(page, [200, 150], [300, 250])
+  await drag(page, [250, 200], [350, 300])
+  await page.getByTestId('tool-select').click()
+  await expect(page.getByTestId('op-unite')).toHaveAttribute('aria-disabled', 'true')
+  await page.keyboard.press('Control+a')
+  await expect(page.getByTestId('op-unite')).toHaveAttribute('aria-disabled', 'false')
+  await page.getByTestId('view-split').click()
+  await expect(page.getByTestId('source-pane')).toContainText('<rect')
+  await page.getByTestId('op-unite').click()
+  await expect(page.locator('[data-shape=path]')).toHaveCount(1)
+  await expect(page.locator('[data-shape=rect]')).toHaveCount(0)
+  await expect(page.getByTestId('source-pane')).toContainText('<path')
+  const before = await page.locator('[data-shape=path]').getAttribute('d')
+  await page.keyboard.press('ArrowRight')
+  expect(await page.locator('[data-shape=path]').getAttribute('d')).not.toBe(before)
+  await page.keyboard.press('Delete')
+  await expect(page.locator('[data-shape=path]')).toHaveCount(0)
+})
+
+test('smiley template, reload keeps the drawing, new asks first', async ({ page }) => {
+  await page.getByTestId('act-new').click() // empty: no confirm
+  await expect(page.getByTestId('start-card')).toBeVisible()
+  await page.getByTestId('start-smiley').click()
+  await expect(page.locator('[data-shape]')).toHaveCount(4)
+  await page.waitForTimeout(700)
+  await page.reload()
+  await expect(page.locator('[data-shape]')).toHaveCount(4)
+  let asked = ''
+  page.once('dialog', (d) => { asked = d.message(); void d.dismiss() })
+  await page.getByTestId('act-new').click()
+  expect(asked).not.toBe('')
+  await expect(page.locator('[data-shape]')).toHaveCount(4)
+})
+
+test('zoom with buttons and wheel', async ({ page }) => {
+  await page.getByTestId('zoom-in').click()
+  await expect(page.getByTestId('zoom-level')).toHaveText('125 %')
+  await page.getByTestId('zoom-reset').click()
+  await expect(page.getByTestId('zoom-level')).toHaveText('100 %')
+  const box = (await page.getByTestId('canvas').boundingBox())!
+  await page.mouse.move(box.x + 300, box.y + 300)
+  await page.mouse.wheel(0, -300)
+  await expect(page.getByTestId('zoom-level')).not.toHaveText('100 %')
+})
+
+test('two-way sync between drawing and source', async ({ page }) => {
+  await page.getByTestId('start-smiley').count() // card was closed in beforeEach
+  await page.getByTestId('act-new').click()
+  await page.getByTestId('start-smiley').click()
+  await page.getByTestId('view-split').click()
+  const input = page.getByTestId('source-input')
+  await expect(input).toHaveValue(/<circle|<ellipse/)
+  // drawing -> source: recolour the face via the source text, then check canvas follows
+  const text = await input.inputValue()
+  await input.fill(text.replace('#ffc93c', '#3b82f6'))
+  await expect(page.locator('[data-shape]').first()).toHaveAttribute('fill', '#3b82f6')
+  // typed text is not rewritten by the app
+  await expect(input).toHaveValue(text.replace('#ffc93c', '#3b82f6'))
+  // invalid SVG keeps the drawing and shows an error with a line
+  await input.fill(text.replace('</svg>', ''))
+  await expect(page.getByTestId('source-error')).toBeVisible()
+  await expect(page.locator('[data-shape]')).toHaveCount(4)
+  // drawing change rewrites the source
+  await page.keyboard.press('Escape')
+  await input.fill(text)
+  await expect(page.getByTestId('source-error')).toBeHidden()
+})

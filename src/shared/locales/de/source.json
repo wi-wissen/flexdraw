@@ -1,0 +1,15 @@
+{
+  "label": "Quelltext",
+  "ariaLabel": "SVG-Quelltext bearbeiten",
+  "hint": "Esc verlässt den Editor",
+  "line": "Zeile {line}",
+  "errors": {
+    "syntax": "Der SVG-Text ist fehlerhaft und kann nicht gelesen werden.",
+    "notSvg": "Das Dokument ist kein SVG. Das Wurzelelement svg fehlt.",
+    "empty": "Der Quelltext ist leer.",
+    "unclosedComment": "Ein Kommentar wurde nicht geschlossen.",
+    "mismatchedTag": "Das schließende Tag passt nicht zum öffnenden Tag „{tag}“.",
+    "unclosedTag": "Das Tag „{tag}“ wurde nicht geschlossen.",
+    "badAttribute": "Ein Attribut im Tag „{tag}“ ist ungültig."
+  }
+}
