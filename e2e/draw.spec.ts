@@ -142,3 +142,41 @@ test('language and theme switch in the app and persist after reload', async ({ p
   expect(await page.locator('html').getAttribute('lang')).toBe(lang)
   expect(await page.locator('html').evaluate((e) => e.classList.contains('dark'))).toBe(dark)
 })
+
+test('resize, rotate with handles; marquee and shift multi-select', async ({ page }) => {
+  await page.getByTestId('tool-rect').click()
+  await drag(page, [200, 200], [300, 260])
+  await drag(page, [400, 200], [480, 260])
+  await page.getByTestId('tool-select').click()
+  const box = (await page.getByTestId('canvas').boundingBox())!
+  // marquee around both
+  await drag(page, [150, 150], [550, 320])
+  await expect(page.getByTestId('op-unite')).toHaveAttribute('aria-disabled', 'false')
+  await page.keyboard.press('Escape')
+  // click first rect, then shift-click second
+  await page.mouse.click(box.x + 250, box.y + 230)
+  await page.keyboard.down('Shift')
+  await page.mouse.click(box.x + 440, box.y + 230)
+  await page.keyboard.up('Shift')
+  await expect(page.getByTestId('op-unite')).toHaveAttribute('aria-disabled', 'false')
+  await page.keyboard.press('Escape')
+  // resize first rect through the south-east handle
+  await page.mouse.click(box.x + 250, box.y + 230)
+  const first = page.locator('[data-shape=rect]').first()
+  const w0 = Number(await first.getAttribute('width'))
+  const se = page.locator('[data-handle=se]')
+  const hb = (await se.boundingBox())!
+  await page.mouse.move(hb.x + hb.width / 2, hb.y + hb.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(hb.x + 60, hb.y + 30)
+  await page.mouse.up()
+  expect(Number(await first.getAttribute('width'))).toBeGreaterThan(w0)
+  // rotate through the rotate handle
+  const rot = page.locator('[data-handle=rotate]')
+  const rb = (await rot.boundingBox())!
+  await page.mouse.move(rb.x + rb.width / 2, rb.y + rb.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(rb.x + rb.width / 2 + 90, rb.y + rb.height / 2 + 60)
+  await page.mouse.up()
+  await expect(first).toHaveAttribute('transform', /rotate\(/)
+})
