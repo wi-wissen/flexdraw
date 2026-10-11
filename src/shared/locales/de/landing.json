@@ -11,7 +11,7 @@
     "badge": "ZEICHNEN • CODE SEHEN • SVG LERNEN • "
   },
   "stickers": {
-    "openSource": "Open Source",
+    "openSource": "Quelltext offen",
     "noAccount": "Kein Konto",
     "svg": "SVG!",
     "free": "100 % kostenlos"
@@ -85,18 +85,18 @@
   "privacy": {
     "kicker": "Datenschutz",
     "title": "Ohne Konto. Ohne Tracking. Läuft im Browser.",
-    "text": "Kinder fangen einfach an zu zeichnen. Keine Anmeldung, nichts wird irgendwohin geschickt.",
+    "text": "Schüler:innen fangen einfach an zu zeichnen. Keine Anmeldung, nichts wird irgendwohin geschickt.",
     "account": { "title": "Kein Konto", "text": "Kein Login, keine E-Mail, kein Passwort." },
     "server": { "title": "Kein Server", "text": "Deine Zeichnung bleibt auf deinem Gerät." },
     "tracking": { "title": "Kein Tracking", "text": "Keine Cookies, keine Statistik, keine Werbung." },
     "offline": { "title": "Fast offline", "text": "Einmal geladen, läuft es auch ohne Internet weiter." },
-    "open": { "title": "Open Source", "text": "Der ganze Code ist öffentlich auf GitHub." }
+    "open": { "title": "Offener Quelltext", "text": "Der ganze Code ist öffentlich auf GitHub." }
   },
   "school": {
-    "kicker": "Für Lehrkräfte",
+    "kicker": "Für Lehrer:innen",
     "title": "Für den Unterricht gebaut",
-    "text": "Gemacht für den Informatikunterricht mit Kindern: klein, übersichtlich und ruhig genug für eine ganze Klasse.",
-    "kids": { "title": "Für Kinder", "text": "Große Knöpfe, wenige Werkzeuge, freundliches Design." },
+    "text": "Gemacht für den Informatikunterricht mit Schüler:innen: klein, übersichtlich und ruhig genug für eine ganze Klasse.",
+    "kids": { "title": "Für Schüler:innen", "text": "Große Knöpfe, wenige Werkzeuge, freundliches Design." },
     "langs": { "title": "Deutsch und Englisch", "text": "Sprache mit einem Klick umschalten." },
     "touch": { "title": "Auch auf Tablets", "text": "Mit Maus, Stift und Finger." },
     "help": { "title": "Hilfe mit Bildern", "text": "Eine Hilfeseite, die jedes Werkzeug erklärt." }
@@ -110,7 +110,7 @@
     "help": "Hilfe",
     "credits": "Credits",
     "github": "Auf GitHub ansehen",
-    "license": "Open Source unter der MIT-Lizenz",
-    "made": "Gemacht für neugierige Kinder und ihre Lehrkräfte."
+    "license": "Quelltext öffentlich auf GitHub",
+    "made": "Gemacht für neugierige Schüler:innen und ihre Lehrer:innen."
   }
 }

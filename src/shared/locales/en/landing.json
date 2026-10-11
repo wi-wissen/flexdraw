@@ -11,7 +11,7 @@
     "badge": "DRAW • SEE THE CODE • LEARN SVG • "
   },
   "stickers": {
-    "openSource": "Open Source",
+    "openSource": "Source is public",
     "noAccount": "No account",
     "svg": "SVG!",
     "free": "100% free"
@@ -90,7 +90,7 @@
     "server": { "title": "No server", "text": "Your drawing stays on your device." },
     "tracking": { "title": "No tracking", "text": "No cookies, no analytics, no ads." },
     "offline": { "title": "Almost offline", "text": "Once loaded, it keeps working without the internet." },
-    "open": { "title": "Open source", "text": "All the code is public on GitHub." }
+    "open": { "title": "Public source code", "text": "All the code is public on GitHub." }
   },
   "school": {
     "kicker": "For teachers",
@@ -110,7 +110,7 @@
     "help": "Help",
     "credits": "Credits",
     "github": "View on GitHub",
-    "license": "Open source under the MIT licence",
+    "license": "Source code public on GitHub",
     "made": "Made for curious kids and their teachers."
   }
 }

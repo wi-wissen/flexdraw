@@ -1,6 +1,6 @@
 {
   "title": "Credits",
-  "intro": "Flex Draw is open source and stands on the shoulders of many free projects. Thank you to everyone who built them!",
+  "intro": "The Flex Draw source code is public, and the project stands on the shoulders of many free projects. Thank you to everyone who built them!",
   "runtime": "What is inside the app",
   "dev": "For building and testing",
   "thanks": "The colour palette follows the Tailwind colours. All libraries run locally in your browser; no data is sent to third parties.",

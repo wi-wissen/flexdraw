@@ -55,4 +55,4 @@ language, the chosen theme, and the current drawing.
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+No license has been chosen yet. The source code is public, but without a license no rights to reuse it are granted.
