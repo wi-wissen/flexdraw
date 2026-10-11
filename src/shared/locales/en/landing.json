@@ -11,10 +11,10 @@
     "badge": "DRAW • SEE THE CODE • LEARN SVG • "
   },
   "stickers": {
-    "openSource": "Source is public",
     "noAccount": "No account",
     "svg": "SVG!",
-    "free": "100% free"
+    "free": "100% free",
+    "school": "For class"
   },
   "marquee": {
     "label": "SVG words you will meet",
@@ -68,38 +68,86 @@
     "kicker": "Shape magic",
     "title": "Combine shapes",
     "text": "Two shapes, four ways to merge them into a new one. Perfect for moons, keyholes and doughnuts.",
-    "unite": { "name": "Unite", "text": "Both together become one shape.", "alt": "Square and circle united into one shape" },
-    "intersect": { "name": "Intersect", "text": "Only the overlap remains.", "alt": "Only the overlap of square and circle remains" },
-    "subtract": { "name": "Subtract", "text": "The top shape bites a piece out.", "alt": "The circle cuts a piece out of the square" },
-    "exclude": { "name": "Exclude", "text": "Everything except the overlap.", "alt": "Square and circle without their overlap" }
+    "unite": {
+      "name": "Unite",
+      "text": "Both together become one shape.",
+      "alt": "Square and circle united into one shape"
+    },
+    "intersect": {
+      "name": "Intersect",
+      "text": "Only the overlap remains.",
+      "alt": "Only the overlap of square and circle remains"
+    },
+    "subtract": {
+      "name": "Subtract",
+      "text": "The top shape bites a piece out.",
+      "alt": "The circle cuts a piece out of the square"
+    },
+    "exclude": {
+      "name": "Exclude",
+      "text": "Everything except the overlap.",
+      "alt": "Square and circle without their overlap"
+    }
   },
   "files": {
     "kicker": "Real files",
     "title": "Your picture as SVG – open and save",
     "text": "No secret format: your drawing is a real .svg file. It opens in every browser and in lots of other programs.",
     "fileName": "my-picture.svg",
-    "open": { "title": "Open", "text": "Load an SVG file and keep drawing." },
-    "edit": { "title": "Change", "text": "Move shapes, pick colours, edit the code." },
-    "save": { "title": "Save", "text": "Download it as .svg – done." }
+    "open": {
+      "title": "Open",
+      "text": "Load an SVG file and keep drawing."
+    },
+    "edit": {
+      "title": "Change",
+      "text": "Move shapes, pick colours, edit the code."
+    },
+    "save": {
+      "title": "Save",
+      "text": "Download it as .svg – done."
+    }
   },
   "privacy": {
     "kicker": "Privacy",
     "title": "No account. No tracking. Runs in the browser.",
     "text": "Children just start drawing. Nothing to sign up for, nothing that gets sent away.",
-    "account": { "title": "No account", "text": "No login, no email, no password." },
-    "server": { "title": "No server", "text": "Your drawing stays on your device." },
-    "tracking": { "title": "No tracking", "text": "No cookies, no analytics, no ads." },
-    "offline": { "title": "Almost offline", "text": "Once loaded, it keeps working without the internet." },
-    "open": { "title": "Public source code", "text": "All the code is public on GitHub." }
+    "account": {
+      "title": "No account",
+      "text": "No login, no email, no password."
+    },
+    "server": {
+      "title": "No server",
+      "text": "Your drawing stays on your device."
+    },
+    "tracking": {
+      "title": "No tracking",
+      "text": "No cookies, no analytics, no ads."
+    },
+    "offline": {
+      "title": "Almost offline",
+      "text": "Once loaded, it keeps working without the internet."
+    }
   },
   "school": {
     "kicker": "For teachers",
     "title": "Built for the classroom",
     "text": "Made for computer science lessons with children: small, clear and calm enough for a whole class.",
-    "kids": { "title": "For children", "text": "Big buttons, few tools, a friendly design." },
-    "langs": { "title": "German and English", "text": "Switch the language with one click." },
-    "touch": { "title": "Tablets too", "text": "Works with mouse, pen and finger." },
-    "help": { "title": "Help with pictures", "text": "A help page that explains every tool." }
+    "kids": {
+      "title": "For children",
+      "text": "Big buttons, few tools, a friendly design."
+    },
+    "langs": {
+      "title": "German and English",
+      "text": "Switch the language with one click."
+    },
+    "touch": {
+      "title": "Tablets too",
+      "text": "Works with mouse, pen and finger."
+    },
+    "help": {
+      "title": "Help with pictures",
+      "text": "A help page that explains every tool."
+    }
   },
   "cta": {
     "title": "Ready? Draw your first SVG.",
@@ -112,5 +160,11 @@
     "github": "View on GitHub",
     "license": "Source code public on GitHub",
     "made": "Made for curious kids and their teachers."
+  },
+  "howto": "How it works",
+  "curious": {
+    "title": "Curious how it all works?",
+    "text": "Flex Draw is built so that you can look inside. If you want to understand how everything works, or improve something yourself, you can find the source code on GitHub.",
+    "button": "View the source code on GitHub"
   }
 }

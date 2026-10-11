@@ -406,3 +406,9 @@
   .lp-scrollbar { display: none !important; }
   .lp-tilt:hover, .lp-letter:hover, .lp-sticker:hover { transform: none; }
 }
+
+/* small, quiet "how does it work" block for the few who want the source code */
+.lp-curious { padding: 2.5rem 0; background: var(--panel); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.lp-curious-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; }
+.lp-curious h2 { flex: 1 1 100%; margin: 0; font-size: 1.35rem; font-weight: 800; }
+.lp-curious p { flex: 1 1 22rem; margin: 0; max-width: 46rem; }

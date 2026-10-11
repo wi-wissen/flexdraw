@@ -11,10 +11,10 @@
     "badge": "ZEICHNEN • CODE SEHEN • SVG LERNEN • "
   },
   "stickers": {
-    "openSource": "Quelltext offen",
     "noAccount": "Kein Konto",
     "svg": "SVG!",
-    "free": "100 % kostenlos"
+    "free": "100 % kostenlos",
+    "school": "Für den Unterricht"
   },
   "marquee": {
     "label": "SVG-Wörter, die du kennenlernst",
@@ -68,38 +68,86 @@
     "kicker": "Formen-Zauberei",
     "title": "Formen kombinieren",
     "text": "Zwei Formen, vier Arten, daraus eine neue zu machen. Perfekt für Monde, Schlüssellöcher und Donuts.",
-    "unite": { "name": "Vereinigen", "text": "Beide zusammen werden eine Form.", "alt": "Quadrat und Kreis zu einer Form vereinigt" },
-    "intersect": { "name": "Schneiden", "text": "Nur die Überlappung bleibt.", "alt": "Nur die Überlappung von Quadrat und Kreis bleibt" },
-    "subtract": { "name": "Abziehen", "text": "Die obere Form beißt ein Stück ab.", "alt": "Der Kreis schneidet ein Stück aus dem Quadrat" },
-    "exclude": { "name": "Ausschließen", "text": "Alles außer der Überlappung.", "alt": "Quadrat und Kreis ohne ihre Überlappung" }
+    "unite": {
+      "name": "Vereinigen",
+      "text": "Beide zusammen werden eine Form.",
+      "alt": "Quadrat und Kreis zu einer Form vereinigt"
+    },
+    "intersect": {
+      "name": "Schneiden",
+      "text": "Nur die Überlappung bleibt.",
+      "alt": "Nur die Überlappung von Quadrat und Kreis bleibt"
+    },
+    "subtract": {
+      "name": "Abziehen",
+      "text": "Die obere Form beißt ein Stück ab.",
+      "alt": "Der Kreis schneidet ein Stück aus dem Quadrat"
+    },
+    "exclude": {
+      "name": "Ausschließen",
+      "text": "Alles außer der Überlappung.",
+      "alt": "Quadrat und Kreis ohne ihre Überlappung"
+    }
   },
   "files": {
     "kicker": "Echte Dateien",
     "title": "Dein Bild als SVG – öffnen und speichern",
     "text": "Kein Geheimformat: Deine Zeichnung ist eine echte .svg-Datei. Sie öffnet sich in jedem Browser und in vielen anderen Programmen.",
     "fileName": "mein-bild.svg",
-    "open": { "title": "Öffnen", "text": "SVG-Datei laden und weiterzeichnen." },
-    "edit": { "title": "Ändern", "text": "Formen verschieben, Farben wählen, Code bearbeiten." },
-    "save": { "title": "Speichern", "text": "Als .svg herunterladen – fertig." }
+    "open": {
+      "title": "Öffnen",
+      "text": "SVG-Datei laden und weiterzeichnen."
+    },
+    "edit": {
+      "title": "Ändern",
+      "text": "Formen verschieben, Farben wählen, Code bearbeiten."
+    },
+    "save": {
+      "title": "Speichern",
+      "text": "Als .svg herunterladen – fertig."
+    }
   },
   "privacy": {
     "kicker": "Datenschutz",
     "title": "Ohne Konto. Ohne Tracking. Läuft im Browser.",
     "text": "Schüler:innen fangen einfach an zu zeichnen. Keine Anmeldung, nichts wird irgendwohin geschickt.",
-    "account": { "title": "Kein Konto", "text": "Kein Login, keine E-Mail, kein Passwort." },
-    "server": { "title": "Kein Server", "text": "Deine Zeichnung bleibt auf deinem Gerät." },
-    "tracking": { "title": "Kein Tracking", "text": "Keine Cookies, keine Statistik, keine Werbung." },
-    "offline": { "title": "Fast offline", "text": "Einmal geladen, läuft es auch ohne Internet weiter." },
-    "open": { "title": "Offener Quelltext", "text": "Der ganze Code ist öffentlich auf GitHub." }
+    "account": {
+      "title": "Kein Konto",
+      "text": "Kein Login, keine E-Mail, kein Passwort."
+    },
+    "server": {
+      "title": "Kein Server",
+      "text": "Deine Zeichnung bleibt auf deinem Gerät."
+    },
+    "tracking": {
+      "title": "Kein Tracking",
+      "text": "Keine Cookies, keine Statistik, keine Werbung."
+    },
+    "offline": {
+      "title": "Fast offline",
+      "text": "Einmal geladen, läuft es auch ohne Internet weiter."
+    }
   },
   "school": {
     "kicker": "Für Lehrer:innen",
     "title": "Für den Unterricht gebaut",
     "text": "Gemacht für den Informatikunterricht mit Schüler:innen: klein, übersichtlich und ruhig genug für eine ganze Klasse.",
-    "kids": { "title": "Für Schüler:innen", "text": "Große Knöpfe, wenige Werkzeuge, freundliches Design." },
-    "langs": { "title": "Deutsch und Englisch", "text": "Sprache mit einem Klick umschalten." },
-    "touch": { "title": "Auch auf Tablets", "text": "Mit Maus, Stift und Finger." },
-    "help": { "title": "Hilfe mit Bildern", "text": "Eine Hilfeseite, die jedes Werkzeug erklärt." }
+    "kids": {
+      "title": "Für Schüler:innen",
+      "text": "Große Knöpfe, wenige Werkzeuge, freundliches Design."
+    },
+    "langs": {
+      "title": "Deutsch und Englisch",
+      "text": "Sprache mit einem Klick umschalten."
+    },
+    "touch": {
+      "title": "Auch auf Tablets",
+      "text": "Mit Maus, Stift und Finger."
+    },
+    "help": {
+      "title": "Hilfe mit Bildern",
+      "text": "Eine Hilfeseite, die jedes Werkzeug erklärt."
+    }
   },
   "cta": {
     "title": "Bereit? Zeichne dein erstes SVG.",
@@ -112,5 +160,11 @@
     "github": "Auf GitHub ansehen",
     "license": "Quelltext öffentlich auf GitHub",
     "made": "Gemacht für neugierige Schüler:innen und ihre Lehrer:innen."
+  },
+  "howto": "So geht’s",
+  "curious": {
+    "title": "Neugierig, wie alles funktioniert?",
+    "text": "Flex Draw ist so gebaut, dass man hineinschauen kann. Wenn du verstehen möchtest, wie alles funktioniert, oder selbst etwas verbessern willst, findest du den Quelltext auf GitHub.",
+    "button": "Quelltext auf GitHub ansehen"
   }
 }

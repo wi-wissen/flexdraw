@@ -54,7 +54,6 @@ export default defineComponent({
         { key: 'server', icon: 'server', tone: 'is-teal' },
         { key: 'tracking', icon: 'eye', tone: 'is-coral' },
         { key: 'offline', icon: 'offline', tone: 'is-yellow' },
-        { key: 'open', icon: 'heart', tone: 'is-teal' },
       ],
       schoolItems: [
         { key: 'kids', icon: 'kid' },
@@ -158,12 +157,12 @@ export default defineComponent({
             <a class="nb-btn is-primary lp-btn-xl" href="./app/" data-testid="cta-start">
               <LpIcon name="freehand" :size="22" />{{ $t('landing.start') }}<LpIcon class="lp-arrow" name="arrow" :size="22" />
             </a>
-            <a class="nb-btn lp-btn-xl" :href="githubUrl" target="_blank" rel="noopener noreferrer" data-testid="cta-github">
-              <LpIcon name="github" :size="22" />{{ $t('landing.github') }}<span class="sr-only"> {{ $t('landing.newTab') }}</span>
+            <a class="nb-btn lp-btn-xl" href="./help/" data-testid="cta-help">
+              <LpIcon name="help" :size="22" />{{ $t('landing.howto') }}
             </a>
           </div>
           <ul class="lp-stickers">
-            <li class="lp-sticker is-teal">{{ $t('landing.stickers.openSource') }}</li>
+            <li class="lp-sticker is-teal">{{ $t('landing.stickers.school') }}</li>
             <li class="lp-sticker is-coral">{{ $t('landing.stickers.noAccount') }}</li>
             <li class="lp-sticker is-yellow is-mono">{{ $t('landing.stickers.svg') }}</li>
             <li class="lp-sticker is-panel">{{ $t('landing.stickers.free') }}</li>
@@ -291,7 +290,7 @@ export default defineComponent({
             <h2 id="privacy-title">{{ $t('landing.privacy.title') }}</h2>
             <p class="lp-lead">{{ $t('landing.privacy.text') }}</p>
           </header>
-          <ul class="lp-grid-5">
+          <ul class="lp-grid-4">
             <li v-for="(p, i) in privacyItems" :key="p.key" class="lp-pcard lp-tilt lp-reveal" :class="p.tone" :style="{ '--stagger': i }">
               <span class="lp-pcard-icon"><LpIcon :name="p.icon" :size="28" /></span>
               <h3>{{ $t('landing.privacy.' + p.key + '.title') }}</h3>
@@ -319,6 +318,17 @@ export default defineComponent({
         </div>
       </section>
 
+      <!-- ============ CURIOUS (small, for the few who want the source) ============ -->
+      <section class="lp-curious" aria-labelledby="curious-title">
+        <div class="lp-wrap lp-curious-inner lp-reveal">
+          <h2 id="curious-title">{{ $t('landing.curious.title') }}</h2>
+          <p>{{ $t('landing.curious.text') }}</p>
+          <a class="nb-btn" :href="githubUrl" target="_blank" rel="noopener noreferrer" data-testid="curious-github">
+            <LpIcon name="github" />{{ $t('landing.curious.button') }}<span class="sr-only"> {{ $t('landing.newTab') }}</span>
+          </a>
+        </div>
+      </section>
+
       <!-- ============ FINAL CTA ============ -->
       <section class="lp-cta" aria-labelledby="cta-title">
         <div class="lp-zigzag is-top" aria-hidden="true" />
@@ -329,8 +339,8 @@ export default defineComponent({
             <a class="nb-btn lp-btn-xl lp-btn-ink" href="./app/" data-testid="cta-start-2">
               <LpIcon name="freehand" :size="22" />{{ $t('landing.start') }}<LpIcon class="lp-arrow" name="arrow" :size="22" />
             </a>
-            <a class="nb-btn lp-btn-xl" :href="githubUrl" target="_blank" rel="noopener noreferrer" data-testid="cta-github-2">
-              <LpIcon name="github" :size="22" />{{ $t('landing.github') }}<span class="sr-only"> {{ $t('landing.newTab') }}</span>
+            <a class="nb-btn lp-btn-xl" href="./help/" data-testid="cta-help-2">
+              <LpIcon name="help" :size="22" />{{ $t('landing.howto') }}
             </a>
           </div>
         </div>

@@ -62,18 +62,20 @@ test('loads without console errors and without third-party requests', async ({ p
   await expect(page.locator('h1')).toHaveCount(1)
 })
 
-test('CTAs point to the app and to GitHub (hero, final band and footer)', async ({ page }) => {
+test('CTAs point to the app and help; GitHub only in the quiet block and footer', async ({ page }) => {
   await gotoWith(page, { lang: 'de' })
   const start = page.getByTestId('cta-start')
   await expect(start).toHaveAttribute('href', './app/')
   await expect(start).toContainText('Zeichnen starten')
   await expect(page.getByTestId('cta-start-2')).toHaveAttribute('href', './app/')
-  for (const id of ['cta-github', 'cta-github-2', 'footer-github']) {
+  await expect(page.getByTestId('cta-help')).toHaveAttribute('href', './help/')
+  for (const id of ['curious-github', 'footer-github']) {
     const a = page.getByTestId(id)
     await expect(a).toHaveAttribute('href', GITHUB)
     await expect(a).toHaveAttribute('rel', 'noopener noreferrer')
-    await expect(a).toContainText('Auf GitHub ansehen')
+    await expect(a).toContainText('GitHub')
   }
+  await expect(page.locator(`a[href="${GITHUB}"]`)).toHaveCount(2)
   await expect(page.getByTestId('footer-credits')).toHaveAttribute('href', './credits/')
   // Resolved URL of the start link really is /app/.
   expect(await start.evaluate((a) => (a as HTMLAnchorElement).pathname)).toBe('/app/')

@@ -38,20 +38,25 @@ describe('Landing page', () => {
     expect(start.attributes('href')).toBe('./app/')
     expect(start.text()).toContain('Zeichnen starten')
     expect(start.find('svg').exists()).toBe(true)
-    const gh = w.get('[data-testid="cta-github"]')
-    expect(gh.text()).toContain('Auf GitHub ansehen')
-    expect(gh.find('svg').exists()).toBe(true)
+    const help = w.get('[data-testid="cta-help"]')
+    expect(help.attributes('href')).toBe('./help/')
+    expect(help.text()).toContain('So geht’s')
+    expect(help.find('svg').exists()).toBe(true)
     w.unmount()
   })
 
-  it('links to GitHub in hero, CTA band and footer with rel noopener noreferrer', () => {
+  it('links to GitHub only in the quiet lower block and the footer, with rel noopener noreferrer', () => {
     const w = mount(Landing, { global: { plugins: [i18n('en')] } })
-    for (const id of ['cta-github', 'cta-github-2', 'footer-github']) {
+    for (const id of ['curious-github', 'footer-github']) {
       const a = w.get(`[data-testid="${id}"]`)
       expect(a.attributes('href'), id).toBe(GITHUB)
       expect(a.attributes('rel'), id).toBe('noopener noreferrer')
-      expect(a.text(), id).toContain('View on GitHub')
+      expect(a.text(), id).toContain('GitHub')
     }
+    // not in the hero or the final call-to-action band
+    expect(w.find('[data-testid="cta-github"]').exists()).toBe(false)
+    expect(w.find('[data-testid="cta-github-2"]').exists()).toBe(false)
+    expect(w.findAll('a[href="' + GITHUB + '"]')).toHaveLength(2)
     expect(w.get('[data-testid="footer-credits"]').attributes('href')).toBe('./credits/')
     expect(w.get('footer a[href="./help/"]').text()).toContain('Help')
     w.unmount()
