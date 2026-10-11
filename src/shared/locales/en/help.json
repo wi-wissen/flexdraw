@@ -99,23 +99,52 @@
         "text": "Only the outer parts stay. The overlap disappears.",
         "alt": "After: the square and the circle without the part where they overlap"
       }
-    },
-    "teacher": {
-      "title": "For teachers",
-      "text": "The four rules match SQL joins. Each shape is a table, and each overlap is a match:",
-      "items": [
-        "Unite = FULL JOIN (all rows of both tables)",
-        "Intersect = INNER JOIN (only rows with a match)",
-        "Subtract = LEFT JOIN, but only the rows without a match",
-        "Exclude = FULL JOIN without the overlap"
-      ]
     }
   },
   "svg": {
     "title": "What is SVG?",
-    "text": "SVG stands for “Scalable Vector Graphics”. An SVG picture is not a photo, it is text: every shape is one line of code. A circle, for example, has a centre (cx and cy) and a radius (r). The browser draws the picture from this text, and the editor writes this text for you while you draw.",
+    "text": "SVG stands for “Scalable Vector Graphics”. An SVG picture is not a photo but text: every shape is one line of code. The browser paints the picture from this text, and the editor writes the text for you while you draw.",
     "codeLabel": "This is the text for this smiley:",
-    "alt": "A drawn smiley: a yellow circle with two eyes and a red mouth"
+    "alt": "A drawn smiley: a yellow circle with two eyes and a red mouth",
+    "anatomy": {
+      "title": "Understanding one line",
+      "intro": "Let's look at a single line: a circle. A piece of text like this is called an element.",
+      "alt": "A yellow circle. The centre is marked with cx and cy, the radius with r.",
+      "centre": "Centre",
+      "radius": "Radius",
+      "legend": {
+        "element": {
+          "name": "Element:",
+          "text": "It starts with an opening angle bracket and the name of the shape, here circle. The name says what gets painted."
+        },
+        "attribute": {
+          "name": "Attributes:",
+          "text": "After that come settings. Each one is a name, an equals sign and a value in quotes, for example r=\"50\"."
+        },
+        "value": {
+          "name": "Values:",
+          "text": "These are numbers or colours. Change a value and the picture changes immediately."
+        },
+        "end": {
+          "name": "End:",
+          "text": "The line ends with a slash and a closing angle bracket. That finishes the element."
+        }
+      },
+      "attrs": {
+        "cx": "is the horizontal position of the centre (from the left).",
+        "cy": "is the vertical position of the centre (from the top).",
+        "r": "is the radius, the distance from the centre to the edge.",
+        "fill": "is the fill colour as a hex code."
+      },
+      "wrapper": "On the outside sits the element svg. It has a start and an end (two lines) and wraps all the shapes, like a picture frame."
+    },
+    "whole": {
+      "title": "Now the whole picture"
+    },
+    "tip": {
+      "title": "Tip: ready-made SVGs",
+      "text": "Need pictures to practise with? This site has lots of free SVG images to download. You can open them in Flex Draw and change them:"
+    }
   },
   "shortcuts": {
     "title": "Keyboard shortcuts",

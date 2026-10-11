@@ -11,6 +11,7 @@
   --on-primary: #0f172a;
   --accent: #2ec4b6;
   --danger: #ff6b6b;
+  --paper: #f7f7f2;
   --canvas-dot: #cbd5e1;
   --font-ui: 'Space Grotesk Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
@@ -20,7 +21,6 @@
   --panel: #172036;
   --ink: #e2e8f0;
   --shadow: #64748b;
-  --canvas-dot: #334155;
 }
 
 @theme inline {
@@ -77,4 +77,9 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 @font-face {
   font-family: 'JetBrains Mono Variable'; font-style: normal; font-display: swap; font-weight: 100 800;
   src: url('../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+}
+
+.fd-footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem;
+  margin-top: 2rem; padding: 1rem; background: var(--panel); border-top: 2px solid var(--ink);
 }

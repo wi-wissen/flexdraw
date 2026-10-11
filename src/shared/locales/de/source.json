@@ -1,7 +1,6 @@
 {
   "label": "Quelltext",
   "ariaLabel": "SVG-Quelltext bearbeiten",
-  "hint": "Esc verlässt den Editor",
   "line": "Zeile {line}",
   "errors": {
     "syntax": "Der SVG-Text ist fehlerhaft und kann nicht gelesen werden.",

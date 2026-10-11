@@ -13,7 +13,7 @@ import type { BooleanOp, Reorder, Scene, Shape, Style, SvgError } from './types'
 import { XmlError } from './xml'
 
 /** Where a change came from. Changes from 'source' must not be written back to the source. */
-export type Origin = 'scene' | 'source'
+export type Origin = 'scene' | 'source' | 'selection'
 export type ChangeListener = (origin: Origin) => void
 
 export type SourceResult = { ok: true; warnings: string[] } | { ok: false; error: SvgError }
@@ -25,6 +25,11 @@ export class Editor {
   private history: History
   private clipboard: Shape[] = []
   private listeners = new Set<ChangeListener>()
+  /** Selection before each undoable step, so undo/redo bring the selection back. */
+  private undoSel: string[][] = []
+  private redoSel: string[][] = []
+  /** Source lines of the shapes after a source edit; null when the text is regenerated. */
+  private sourceLines: number[] | null = null
 
   constructor(scene: Scene = emptyScene()) {
     this.scene = scene
@@ -36,6 +41,7 @@ export class Editor {
     return () => this.listeners.delete(fn)
   }
   private emit(origin: Origin = 'scene') {
+    if (origin === 'scene') this.sourceLines = null
     this.listeners.forEach((l) => l(origin))
   }
 
@@ -71,9 +77,43 @@ export class Editor {
     this.emit()
   }
   commit(next: Scene) {
-    this.scene = this.history.push(next)
+    this.record(next)
     this.emit()
   }
+  /** Pushes to history and remembers the selection from before the step. */
+  private record(next: Scene) {
+    const before = this.history.current
+    const sel = [...this.selection]
+    this.scene = this.history.push(next)
+    if (this.history.current !== before) {
+      this.undoSel.push(sel)
+      if (this.undoSel.length > 100) this.undoSel.shift()
+      this.redoSel = []
+    }
+  }
+  private resetSelectionHistory() {
+    this.undoSel = []
+    this.redoSel = []
+  }
+  /** 1-based source line of a shape in the current source text. */
+  lineOfShape(id: string): number | null {
+    const i = this.scene.shapes.findIndex((s) => s.id === id)
+    if (i < 0) return null
+    return this.sourceLines ? (this.sourceLines[i] ?? null) : i + 2
+  }
+  /** The shape (id) that owns a source line, or null. */
+  shapeAtLine(line: number): string | null {
+    const shapes = this.scene.shapes
+    for (let i = 0; i < shapes.length; i++) {
+      const start = this.sourceLines ? this.sourceLines[i] : i + 2
+      if (start === undefined) continue
+      const nextStart = this.sourceLines ? this.sourceLines[i + 1] : i + 3
+      const end = nextStart === undefined ? start : this.sourceLines ? nextStart - 1 : start
+      if (line >= start && line <= end) return shapes[i]!.id
+    }
+    return null
+  }
+
   /** Drop an uncommitted preview. */
   cancelPreview() {
     this.scene = this.history.current
@@ -83,7 +123,7 @@ export class Editor {
   // ---- selection ----
   select(ids: string[]) {
     this.selection = ids.filter((id) => this.scene.shapes.some((s) => s.id === id))
-    this.emit()
+    this.emit('selection')
   }
   selectAll() {
     this.select(this.scene.shapes.map((s) => s.id))
@@ -94,12 +134,13 @@ export class Editor {
 
   // ---- editing ----
   add(shape: Shape) {
-    this.commit(addShape(this.scene, shape))
-    this.select([shape.id])
+    this.record(addShape(this.scene, shape))
+    this.selection = [shape.id]
+    this.emit()
   }
   deleteSelection() {
     if (!this.selection.length) return
-    this.commit(removeShapes(this.scene, this.selection))
+    this.record(removeShapes(this.scene, this.selection))
     this.selection = []
     this.emit()
   }
@@ -118,8 +159,9 @@ export class Editor {
   duplicate() {
     if (!this.selection.length) return
     const r = duplicateShapes(this.scene, this.selection)
-    this.commit(r.scene)
-    this.select(r.ids)
+    this.record(r.scene)
+    this.selection = r.ids
+    this.emit()
   }
   copy() {
     this.clipboard = this.selectedShapes
@@ -127,8 +169,9 @@ export class Editor {
   paste() {
     if (!this.clipboard.length) return
     const copies = this.clipboard.map((s) => ({ ...s, id: newId() }) as Shape)
-    this.commit({ shapes: [...this.scene.shapes, ...copies] })
-    this.select(copies.map((c) => c.id))
+    this.record({ shapes: [...this.scene.shapes, ...copies] })
+    this.selection = copies.map((c) => c.id)
+    this.emit()
     // next paste lands a bit further down-right
     this.clipboard = this.clipboard.map((s) => ({ ...s }))
   }
@@ -160,20 +203,28 @@ export class Editor {
     const rest = this.scene.shapes.filter((s) => s !== lower && s !== upper)
     const shapes = [...rest]
     if (result) shapes.splice(Math.min(at, shapes.length), 0, result)
-    this.commit({ shapes })
-    this.select(result ? [result.id] : [])
+    this.record({ shapes })
+    this.selection = result ? [result.id] : []
+    this.emit()
     return true
   }
 
   // ---- history ----
   undo() {
+    if (!this.history.canUndo) return
+    this.redoSel.push([...this.selection])
     this.scene = this.history.undo()
-    this.selection = this.selection.filter((id) => this.scene.shapes.some((s) => s.id === id))
-    this.emit()
+    this.restoreSelection(this.undoSel.pop())
   }
   redo() {
+    if (!this.history.canRedo) return
+    this.undoSel.push([...this.selection])
     this.scene = this.history.redo()
-    this.selection = this.selection.filter((id) => this.scene.shapes.some((s) => s.id === id))
+    this.restoreSelection(this.redoSel.pop())
+  }
+  private restoreSelection(ids: string[] | undefined) {
+    const have = (id: string) => this.scene.shapes.some((s) => s.id === id)
+    this.selection = (ids ?? this.selection).filter(have)
     this.emit()
   }
 
@@ -181,6 +232,7 @@ export class Editor {
   /** Starts over (the UI asks for confirmation before calling this). */
   newDocument() {
     this.history.reset(emptyScene())
+    this.resetSelectionHistory()
     this.scene = this.history.current
     this.selection = []
     this.emit()
@@ -188,6 +240,7 @@ export class Editor {
   /** Loads a whole scene as a fresh start (templates, opened files). */
   loadScene(scene: Scene) {
     this.history.reset(scene)
+    this.resetSelectionHistory()
     this.scene = scene
     this.selection = []
     this.emit()
@@ -206,8 +259,9 @@ export class Editor {
   applySource(text: string): SourceResult {
     try {
       const r = importSvg(text)
-      this.scene = this.history.push(r.scene)
+      this.record(r.scene)
       this.selection = []
+      this.sourceLines = r.lines
       this.emit('source')
       return { ok: true, warnings: r.warnings }
     } catch (e) {

@@ -5,7 +5,7 @@ test('all three pages load without third-party requests', async ({ page, baseURL
   page.on('request', (r) => {
     if (!r.url().startsWith(baseURL!) && !r.url().startsWith('data:')) foreign.push(r.url())
   })
-  for (const path of ['/', '/app/', '/help/']) {
+  for (const path of ['/', '/app/', '/help/', '/credits/']) {
     await page.goto(path)
     await expect(page.locator('header').first()).toBeVisible()
   }

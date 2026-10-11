@@ -1,0 +1,22 @@
+{
+  "title": "Credits",
+  "intro": "Flex Draw is open source and stands on the shoulders of many free projects. Thank you to everyone who built them!",
+  "runtime": "What is inside the app",
+  "dev": "For building and testing",
+  "thanks": "The colour palette follows the Tailwind colours. All libraries run locally in your browser; no data is sent to third parties.",
+  "libs": {
+    "vue": "The framework for the user interface.",
+    "paper": "Does the shape maths: combining shapes (unite, intersect, subtract, exclude) and smoothing freehand lines.",
+    "i18n": "Translations for German and English.",
+    "hljs": "Colours the SVG source code (core and XML only).",
+    "tailwind": "Utility classes for layout and the design colours.",
+    "grotesk": "The interface font, served locally.",
+    "jetbrains": "The font for source code and hex codes, served locally.",
+    "vite": "Builds and serves the app.",
+    "vitest": "Runs the automated tests.",
+    "vtu": "Tests the Vue components.",
+    "playwright": "Tests the app in a real browser.",
+    "typescript": "Finds mistakes before the app runs.",
+    "eslint": "Checks the code for style and mistakes."
+  }
+}

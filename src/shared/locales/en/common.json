@@ -1,9 +1,21 @@
 {
   "tagline": "Draw SVG and understand it",
-  "lang": { "label": "Language", "de": "Deutsch", "en": "English", "switchTo": "Switch language to {name}" },
-  "theme": { "label": "Appearance", "light": "Light", "dark": "Dark" },
+  "lang": {
+    "label": "Language",
+    "de": "Deutsch",
+    "en": "English",
+    "switchTo": "Switch language to {name}"
+  },
+  "theme": {
+    "label": "Appearance",
+    "light": "Light",
+    "dark": "Dark"
+  },
   "help": "Help",
   "app": "Draw",
   "home": "Home",
-  "skip": "Skip to content"
+  "skip": "Skip to content",
+  "credits": "Credits",
+  "github": "GitHub",
+  "footer": "More pages"
 }

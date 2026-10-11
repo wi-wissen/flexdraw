@@ -13,6 +13,7 @@ export default defineConfig({
         landing: resolve(import.meta.dirname, 'index.html'),
         app: resolve(import.meta.dirname, 'app/index.html'),
         help: resolve(import.meta.dirname, 'help/index.html'),
+        credits: resolve(import.meta.dirname, 'credits/index.html'),
       },
     },
   },

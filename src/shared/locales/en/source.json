@@ -1,7 +1,6 @@
 {
   "label": "Source code",
   "ariaLabel": "Edit SVG source code",
-  "hint": "Esc leaves the editor",
   "line": "line {line}",
   "errors": {
     "syntax": "The SVG text is malformed and cannot be read.",

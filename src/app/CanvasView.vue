@@ -485,7 +485,7 @@ export default defineComponent({
 
 <style scoped>
 .canvas-wrap {
-  position: relative; width: 100%; height: 100%; overflow: hidden; background-color: var(--bg);
+  position: relative; width: 100%; height: 100%; overflow: hidden; background-color: var(--paper);
   background-image: radial-gradient(var(--canvas-dot) 1.2px, transparent 1.2px);
 }
 .canvas-svg { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; }

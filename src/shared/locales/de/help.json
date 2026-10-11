@@ -99,23 +99,52 @@
         "text": "Nur die äußeren Teile bleiben. Die Überschneidung verschwindet.",
         "alt": "Nachher: Quadrat und Kreis ohne den Teil, wo sie sich überlappen"
       }
-    },
-    "teacher": {
-      "title": "Für Lehrkräfte",
-      "text": "Die vier Regeln entsprechen SQL-Verknüpfungen. Jede Form ist eine Tabelle, jede Überlappung ein Treffer:",
-      "items": [
-        "Vereinigen = FULL JOIN (alle Zeilen beider Tabellen)",
-        "Schnittmenge = INNER JOIN (nur Zeilen mit Treffer)",
-        "Abziehen = LEFT JOIN, aber nur die Zeilen ohne Treffer",
-        "Ausschließen = FULL JOIN ohne die Überschneidung"
-      ]
     }
   },
   "svg": {
     "title": "Was ist SVG?",
-    "text": "SVG steht für „Scalable Vector Graphics“. Ein SVG-Bild ist kein Foto, sondern Text: Jede Form steht als eine Zeile im Code. Ein Kreis hat zum Beispiel einen Mittelpunkt (cx und cy) und einen Radius (r). Der Browser malt das Bild aus diesem Text, und der Editor schreibt diesen Text für dich, während du zeichnest.",
+    "text": "SVG steht für „Scalable Vector Graphics“. Ein SVG-Bild ist kein Foto, sondern Text: Jede Form steht als eine Zeile im Code. Der Browser malt das Bild aus diesem Text, und der Editor schreibt diesen Text für dich, während du zeichnest.",
     "codeLabel": "So sieht der Text für diesen Smiley aus:",
-    "alt": "Ein gezeichneter Smiley: gelber Kreis mit zwei Augen und einem roten Mund"
+    "alt": "Ein gezeichneter Smiley: gelber Kreis mit zwei Augen und einem roten Mund",
+    "anatomy": {
+      "title": "Eine Zeile verstehen",
+      "intro": "Schauen wir uns eine einzige Zeile an: einen Kreis. So ein Stück Text heißt Element.",
+      "alt": "Ein gelber Kreis. Der Mittelpunkt ist mit cx und cy markiert, der Radius mit r.",
+      "centre": "Mittelpunkt",
+      "radius": "Radius",
+      "legend": {
+        "element": {
+          "name": "Element:",
+          "text": "Es beginnt mit einer öffnenden spitzen Klammer und dem Namen der Form, hier circle (Kreis). Der Name sagt, was gemalt wird."
+        },
+        "attribute": {
+          "name": "Attribute:",
+          "text": "Dahinter stehen Einstellungen. Jede besteht aus einem Namen, einem Gleichheitszeichen und einem Wert in Anführungszeichen, zum Beispiel r=\"50\"."
+        },
+        "value": {
+          "name": "Werte:",
+          "text": "Das sind Zahlen oder Farben. Ändert man einen Wert, ändert sich das Bild sofort."
+        },
+        "end": {
+          "name": "Ende:",
+          "text": "Die Zeile endet mit Schrägstrich und schließender spitzer Klammer. Damit ist das Element fertig."
+        }
+      },
+      "attrs": {
+        "cx": "ist die waagerechte Position des Mittelpunkts (von links).",
+        "cy": "ist die senkrechte Position des Mittelpunkts (von oben).",
+        "r": "ist der Radius, also der Abstand vom Mittelpunkt zum Rand.",
+        "fill": "ist die Füllfarbe als Hex-Code."
+      },
+      "wrapper": "Ganz außen steht das Element svg. Es hat einen Anfang und ein Ende (zwei Zeilen) und umschließt alle Formen, so wie ein Bilderrahmen."
+    },
+    "whole": {
+      "title": "Jetzt das ganze Bild"
+    },
+    "tip": {
+      "title": "Tipp: fertige SVGs",
+      "text": "Du brauchst Vorlagen zum Üben? Auf dieser Seite gibt es viele kostenlose SVG-Bilder zum Herunterladen. Du kannst sie in Flex Draw öffnen und verändern:"
+    }
   },
   "shortcuts": {
     "title": "Tastenkürzel",

@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import AppFooter from '../shared/components/AppFooter.vue'
 import AppHeader from '../shared/components/AppHeader.vue'
 import StepPic from './illustrations/StepPic.vue'
 import ToolPic from './illustrations/ToolPic.vue'
+import AnatomyPic from './illustrations/AnatomyPic.vue'
 import BoolPic from './illustrations/BoolPic.vue'
 import SmileyPic from './illustrations/SmileyPic.vue'
 
@@ -16,9 +18,10 @@ const SVG_SOURCE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 140
 
 export default defineComponent({
   name: 'HelpPage',
-  components: { AppHeader, StepPic, ToolPic, BoolPic, SmileyPic },
+  components: { AppFooter, AnatomyPic, AppHeader, StepPic, ToolPic, BoolPic, SmileyPic },
   data() {
     return {
+      attrKeys: ['cx', 'cy', 'r', 'fill'],
       svgSource: SVG_SOURCE,
       tocIds: ['start', 'tools', 'combine', 'svg', 'shortcuts'],
       stepKeys: ['draw', 'select', 'colour', 'save'],
@@ -104,18 +107,32 @@ export default defineComponent({
           />
         </li>
       </ul>
-      <aside class="help-teacher" aria-labelledby="teacher-title">
-        <h3 id="teacher-title">{{ $t('help.combine.teacher.title') }}</h3>
-        <p>{{ $t('help.combine.teacher.text') }}</p>
-        <ul>
-          <li v-for="(item, i) in $tm('help.combine.teacher.items')" :key="i">{{ item }}</li>
-        </ul>
-      </aside>
     </section>
 
     <section id="svg" class="nb-panel help-card" aria-labelledby="svg-title">
       <h2 id="svg-title">{{ $t('help.svg.title') }}</h2>
       <p>{{ $t('help.svg.text') }}</p>
+
+      <h3>{{ $t('help.svg.anatomy.title') }}</h3>
+      <p>{{ $t('help.svg.anatomy.intro') }}</p>
+      <div class="help-svg-row">
+        <figure class="help-figure">
+          <AnatomyPic :label="$t('help.svg.anatomy.alt')" :centre="$t('help.svg.anatomy.centre')" :radius="$t('help.svg.anatomy.radius')" />
+        </figure>
+        <pre class="help-code help-anatomy" tabindex="0"><code><span class="t-tag">&lt;circle</span> <span class="t-attr">cx</span>=<span class="t-val">"60"</span> <span class="t-attr">cy</span>=<span class="t-val">"60"</span> <span class="t-attr">r</span>=<span class="t-val">"50"</span> <span class="t-attr">fill</span>=<span class="t-val">"#ffc93c"</span> <span class="t-tag">/&gt;</span></code></pre>
+      </div>
+      <ol class="help-legend">
+        <li><strong class="t-tag">{{ $t('help.svg.anatomy.legend.element.name') }}</strong> {{ $t('help.svg.anatomy.legend.element.text') }}</li>
+        <li><strong class="t-attr">{{ $t('help.svg.anatomy.legend.attribute.name') }}</strong> {{ $t('help.svg.anatomy.legend.attribute.text') }}</li>
+        <li><strong class="t-val">{{ $t('help.svg.anatomy.legend.value.name') }}</strong> {{ $t('help.svg.anatomy.legend.value.text') }}</li>
+        <li><strong class="t-tag">{{ $t('help.svg.anatomy.legend.end.name') }}</strong> {{ $t('help.svg.anatomy.legend.end.text') }}</li>
+      </ol>
+      <ul class="help-attrs">
+        <li v-for="k in attrKeys" :key="k"><code>{{ k }}</code> {{ $t('help.svg.anatomy.attrs.' + k) }}</li>
+      </ul>
+      <p>{{ $t('help.svg.anatomy.wrapper') }}</p>
+
+      <h3>{{ $t('help.svg.whole.title') }}</h3>
       <div class="help-svg-row">
         <figure class="help-figure">
           <SmileyPic :label="$t('help.svg.alt')" />
@@ -125,6 +142,14 @@ export default defineComponent({
           <pre class="help-code" tabindex="0"><code>{{ svgSource }}</code></pre>
         </div>
       </div>
+
+      <aside class="help-tip" aria-labelledby="tip-title">
+        <h3 id="tip-title">{{ $t('help.svg.tip.title') }}</h3>
+        <p>
+          {{ $t('help.svg.tip.text') }}
+          <a href="https://freesvg.org/" target="_blank" rel="noopener noreferrer">freesvg.org</a>
+        </p>
+      </aside>
     </section>
 
     <section id="shortcuts" class="nb-panel help-card" aria-labelledby="shortcuts-title">
@@ -156,6 +181,7 @@ export default defineComponent({
       <p>{{ $t('help.shortcuts.mac') }}</p>
     </section>
   </main>
+  <AppFooter />
 </template>
 
 <style scoped>
@@ -240,7 +266,7 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 .help-step {
@@ -285,27 +311,6 @@ export default defineComponent({
   padding-top: 0;
 }
 
-.help-teacher {
-  margin-top: 1.25rem;
-  padding: 1rem 1.25rem;
-  background: #ffc93c;
-  color: #0f172a;
-  border: 2px solid #0f172a;
-  box-shadow: 4px 4px 0 var(--shadow);
-}
-.help-teacher h3 {
-  margin-top: 0;
-}
-.help-teacher p,
-.help-teacher ul {
-  margin: 0.25rem 0 0.5rem;
-}
-.help-teacher ul {
-  padding-left: 1.25rem;
-}
-.help-teacher li {
-  margin: 0.2rem 0;
-}
 
 .help-figure {
   margin: 0;
@@ -385,4 +390,20 @@ export default defineComponent({
   border: 2px solid var(--ink);
   box-shadow: 2px 2px 0 var(--shadow);
 }
+
+.help-anatomy { font-size: 1.05rem; align-self: center; white-space: pre-wrap; word-break: break-word; }
+.t-tag { color: #1d4ed8; }
+.t-attr { color: #b45309; }
+.t-val { color: #15803d; }
+:global(.dark) .t-tag { color: #7dd3fc; }
+:global(.dark) .t-attr { color: #fcd34d; }
+:global(.dark) .t-val { color: #86efac; }
+.help-legend { display: grid; gap: 0.4rem; padding-left: 1.25rem; margin: 0.75rem 0; }
+.help-legend strong { font-family: var(--font-mono); }
+.help-attrs { display: grid; gap: 0.25rem; padding-left: 1.25rem; margin: 0.75rem 0; }
+.help-attrs code { font-family: var(--font-mono); font-weight: 700; background: var(--bg); border: 2px solid var(--ink); padding: 0 0.3rem; }
+.help-tip { margin-top: 1rem; padding: 0.75rem 1rem; border: 2px solid var(--ink); background: var(--accent); color: #0f172a; box-shadow: 4px 4px 0 var(--shadow); }
+.help-tip h3 { margin: 0 0 0.25rem; }
+.help-tip p { margin: 0; }
+.help-tip a { color: #0f172a; font-weight: 700; }
 </style>

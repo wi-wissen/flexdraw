@@ -23,7 +23,7 @@ export default defineComponent({
       :data-testid="`tool-${t}`" :aria-pressed="tool === t" :title="$t('app.hint.' + t)" @click="$emit('update:tool', t)"
     >
       <Icon :name="t" />{{ $t('app.tools.' + t) }}
-      <Icon v-if="tool === t" name="check" class="ml-auto" />
+      <Icon name="check" class="ml-auto" :class="{ invisible: tool !== t }" />
     </button>
   </div>
 </template>

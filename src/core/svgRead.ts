@@ -1,22 +1,15 @@
 // Safe SVG import. Only a whitelist of geometry elements and a few presentation attributes
 // are read; scripts, event attributes, external references, gradients, filters and text are
 // dropped (and reported as warnings). Nothing from the input is ever inserted as markup.
-import { normalizeHex } from './color'
+import { parseCssColor } from './cssColor'
 import { num, round2, roundPathData } from './numfmt'
-import { transformToD } from './paperBridge'
+import { absolutePathData, transformToD } from './paperBridge'
 import { newId } from './scene'
 import type { ImportResult, Paint, PathShape, Scene, Shape, SvgError } from './types'
 import { parseXml, XmlError, type XmlNode } from './xml'
 
 type Matrix = [number, number, number, number, number, number]
 const IDENTITY: Matrix = [1, 0, 0, 1, 0, 0]
-
-const NAMED: Record<string, string> = {
-  black: '#000000', white: '#ffffff', red: '#ff0000', green: '#008000', lime: '#00ff00', blue: '#0000ff',
-  yellow: '#ffff00', orange: '#ffa500', purple: '#800080', pink: '#ffc0cb', brown: '#a52a2a', gray: '#808080',
-  grey: '#808080', cyan: '#00ffff', aqua: '#00ffff', magenta: '#ff00ff', fuchsia: '#ff00ff', navy: '#000080',
-  teal: '#008080', maroon: '#800000', olive: '#808000', silver: '#c0c0c0', gold: '#ffd700',
-}
 
 interface Ctx {
   fill: Paint
@@ -29,22 +22,25 @@ const GEOMETRY = new Set(['rect', 'circle', 'ellipse', 'polygon', 'polyline', 'l
 const CONTAINERS = new Set(['g', 'svg'])
 const IGNORED_SILENT = new Set(['title', 'desc', 'metadata', 'defs', 'namedview'])
 
+/**
+ * Resolves a paint value. Returns undefined for "inherit"/empty. Unknown values never turn
+ * into black silently: they fall back to a neutral grey and raise a warning.
+ */
 export function parseColor(v: string, warn: (k: string) => void): Paint | undefined {
   const s = v.trim().toLowerCase()
   if (!s || s === 'inherit') return undefined
-  if (s === 'none' || s === 'transparent') return 'none'
+  if (s === 'none') return 'none'
   if (s === 'currentcolor') return '#000000'
   if (s.startsWith('url(')) {
     warn('svg.warn.gradient')
     return '#cccccc'
   }
-  const hex = normalizeHex(s)
-  if (hex) return hex
-  const rgb = /^rgb\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)\s*\)$/.exec(s)
-  if (rgb) return '#' + [rgb[1], rgb[2], rgb[3]].map((n) => Math.min(255, +n!).toString(16).padStart(2, '0')).join('')
-  if (NAMED[s]) return NAMED[s]
-  warn('svg.warn.color')
-  return '#000000'
+  const c = parseCssColor(s)
+  if (!c) {
+    warn('svg.warn.color')
+    return '#999999'
+  }
+  return c.alpha === 0 ? 'none' : c.hex
 }
 
 function mul(a: Matrix, b: Matrix): Matrix {
@@ -87,7 +83,7 @@ const f = (v: string | undefined, d = 0): number => {
 
 function styleAttrs(n: XmlNode): Record<string, string> {
   const out: Record<string, string> = {}
-  for (const k of ['fill', 'stroke', 'stroke-width']) if (n.attrs[k] !== undefined) out[k] = n.attrs[k]!
+  for (const k of ['fill', 'stroke', 'stroke-width', 'fill-opacity', 'stroke-opacity', 'opacity', 'fill-rule']) if (n.attrs[k] !== undefined) out[k] = n.attrs[k]!
   for (const decl of (n.attrs.style ?? '').split(';')) {
     const i = decl.indexOf(':')
     if (i > 0) out[decl.slice(0, i).trim()] = decl.slice(i + 1).trim()
@@ -108,6 +104,7 @@ export function importSvg(src: string): ImportResult {
   if (root.name.replace(/^.*:/, '') !== 'svg') throw new XmlError({ key: 'svg.error.notSvg', line: root.line })
 
   const shapes: Shape[] = []
+  const lines: number[] = []
 
   const walk = (n: XmlNode, inherited: Ctx) => {
     const name = n.name.replace(/^.*:/, '')
@@ -134,18 +131,26 @@ export function importSvg(src: string): ImportResult {
     }
     if (!GEOMETRY.has(name)) return warn('svg.warn.unsupported')
 
-    const style = { fill: ctx.fill, stroke: ctx.stroke, strokeWidth: round2(ctx.strokeWidth) }
-    const shape = buildShape(name, n, style)
-    if (shape) shapes.push(applyMatrix(shape, ctx.matrix))
+    const zero = (k: string) => st[k] !== undefined && parseFloat(st[k]!) === 0
+    const style = {
+      fill: zero('fill-opacity') || zero('opacity') ? 'none' : ctx.fill,
+      stroke: zero('stroke-opacity') || zero('opacity') ? 'none' : ctx.stroke,
+      strokeWidth: round2(ctx.strokeWidth),
+    }
+    const shape = buildShape(name, n, style, st['fill-rule'] === 'evenodd' ? 'evenodd' : 'nonzero')
+    if (shape) {
+      shapes.push(applyMatrix(shape, ctx.matrix))
+      lines.push(n.line)
+    }
   }
 
   walk(root, { fill: '#000000', stroke: 'none', strokeWidth: 1, matrix: IDENTITY })
-  return { scene: { shapes } as Scene, warnings: [...warnings] }
+  return { scene: { shapes } as Scene, warnings: [...warnings], lines }
 }
 
 type St = { fill: Paint; stroke: Paint; strokeWidth: number }
 
-function buildShape(name: string, n: XmlNode, st: St): Shape | null {
+function buildShape(name: string, n: XmlNode, st: St, fillRule: 'nonzero' | 'evenodd'): Shape | null {
   const a = n.attrs
   const id = newId()
   switch (name) {
@@ -166,12 +171,15 @@ function buildShape(name: string, n: XmlNode, st: St): Shape | null {
       if (nums.length < 4) return null
       let d = `M ${num(nums[0]!)} ${num(nums[1]!)}`
       for (let i = 2; i + 1 < nums.length; i += 2) d += ` L ${num(nums[i]!)} ${num(nums[i + 1]!)}`
-      return { kind: 'path', id, d, ...st, fill: a.fill === undefined && st.fill === '#000000' ? 'none' : st.fill }
+      return { kind: 'path', id, d, fillRule, ...st, fill: a.fill === undefined && st.fill === '#000000' ? 'none' : st.fill }
     }
     case 'line':
-      return { kind: 'path', id, d: `M ${num(f(a.x1))} ${num(f(a.y1))} L ${num(f(a.x2))} ${num(f(a.y2))}`, ...st, fill: 'none' }
+      return { kind: 'path', id, d: `M ${num(f(a.x1))} ${num(f(a.y1))} L ${num(f(a.x2))} ${num(f(a.y2))}`, fillRule, ...st, fill: 'none' }
     case 'path':
-      return a.d ? { kind: 'path', id, d: roundPathData(a.d.trim()), ...st } : null
+      if (!a.d) return null
+      // Relative commands would accumulate rounding errors, so they are made absolute first.
+      const d = /[mlhvcsqta]/.test(a.d) ? absolutePathData(a.d) : roundPathData(a.d.trim())
+      return d ? { kind: 'path', id, d, fillRule, ...st } : null
   }
   return null
 }
@@ -195,7 +203,7 @@ function applyMatrix(s: Shape, m: Matrix): Shape {
   }
   if (s.kind === 'polygon') return { ...s, points: s.points.map((p) => pt(p.x, p.y)) }
   const path = s as Shape
-  const out: PathShape = { kind: 'path', id: s.id, d: transformToD(path, m), fill: s.fill, stroke: s.stroke, strokeWidth: s.strokeWidth }
+  const out: PathShape = { kind: 'path', id: s.id, d: transformToD(path, m), fillRule: s.kind === 'path' ? s.fillRule : 'nonzero', fill: s.fill, stroke: s.stroke, strokeWidth: s.strokeWidth }
   return out
 }
 

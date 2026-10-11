@@ -67,6 +67,7 @@ function toItem(shape: Shape): paper.Item {
     }
     case 'path': {
       const c = new P.CompoundPath(shape.d)
+      c.fillRule = shape.fillRule ?? 'evenodd'
       c.remove()
       return c
     }
@@ -136,4 +137,9 @@ export function hitShape(shape: Shape, x: number, y: number, tolerance = 0): boo
     const near = p.getNearestPoint(pt)
     return near ? near.getDistance(pt) <= reach : false
   })
+}
+
+/** Normalises path data to absolute M/L/C/Z commands (used for imported relative paths). */
+export function absolutePathData(d: string): string {
+  return itemToD(new (ps().CompoundPath)(d))
 }

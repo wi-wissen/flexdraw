@@ -17,8 +17,10 @@ export default defineComponent({
   props: {
     modelValue: { type: String, required: true },
     error: { type: Object as PropType<SvgError | null>, default: null },
+    /** 1-based source lines to mark (the lines of the selected shapes). */
+    highlightLines: { type: Array as PropType<number[]>, default: () => [] },
   },
-  emits: ['edit'],
+  emits: ['edit', 'caret-line'],
   data() {
     return {
       localText: this.modelValue,
@@ -27,6 +29,8 @@ export default defineComponent({
       pending: false,
       timer: 0,
       focused: false,
+      scrollTop: 0,
+      lastCaretLine: 0,
     }
   },
   computed: {
@@ -38,6 +42,18 @@ export default defineComponent({
     },
   },
   watch: {
+    highlightLines(lines: number[]) {
+      // A selection made in the drawing scrolls its source line into view.
+      const first = lines[0]
+      const ta = this.$refs.input as HTMLTextAreaElement | undefined
+      if (!first || !ta || this.focused) return
+      const lh = this.lineHeightPx()
+      const top = (first - 1) * lh
+      if (top < ta.scrollTop || top + lh * 2 > ta.scrollTop + ta.clientHeight) {
+        ta.scrollTop = Math.max(0, top - ta.clientHeight / 3)
+        this.syncScroll()
+      }
+    },
     localText() {
       this.paint()
     },
@@ -67,6 +83,22 @@ export default defineComponent({
         e.preventDefault()
         ;(e.target as HTMLTextAreaElement).blur()
       }
+    },
+    lineHeightPx(): number {
+      const ta = this.$refs.input as HTMLTextAreaElement | undefined
+      return ta ? parseFloat(getComputedStyle(ta).lineHeight) || 20 : 20
+    },
+    bandStyle(line: number): Record<string, string> {
+      return { top: `calc(0.75rem + ${(line - 1) * 1.5 * 0.9}rem - ${this.scrollTop}px)` }
+    },
+    /** Tells the parent which source line the caret is on (click or arrow keys). */
+    reportCaret() {
+      const ta = this.$refs.input as HTMLTextAreaElement | undefined
+      if (!ta) return
+      const line = ta.value.slice(0, ta.selectionStart).split('\n').length
+      if (line === this.lastCaretLine) return
+      this.lastCaretLine = line
+      this.$emit('caret-line', line)
     },
     onFocus() {
       this.focused = true
@@ -130,6 +162,7 @@ export default defineComponent({
       if (!ta || !layer) return
       layer.scrollTop = ta.scrollTop
       layer.scrollLeft = ta.scrollLeft
+      this.scrollTop = ta.scrollTop
     },
   },
 })
@@ -139,6 +172,7 @@ export default defineComponent({
   <div class="sv">
     <span class="sv-label">{{ $t('source.label') }}</span>
     <div class="sv-box">
+      <div v-for="line in highlightLines" :key="line" class="sv-band" data-testid="source-band" :style="bandStyle(line)" aria-hidden="true"></div>
       <pre ref="highlight" class="sv-layer sv-highlight" data-testid="source-highlight" aria-hidden="true"><code ref="code" class="hljs"></code></pre>
       <textarea
         ref="input"
@@ -154,11 +188,12 @@ export default defineComponent({
         @input="onInput"
         @keydown="onKeydown"
         @scroll="onScroll"
+        @click="reportCaret"
+        @keyup="reportCaret"
         @focus="onFocus"
         @blur="onBlur"
       ></textarea>
     </div>
-    <p class="sv-hint">{{ $t('source.hint') }}</p>
     <div v-if="error" class="sv-error" role="alert" data-testid="source-error">
       <strong>{{ errorMessage }}</strong>
       <span v-if="typeof error.line === 'number'">{{ $t('source.line', { line: error.line }) }}</span>
@@ -170,6 +205,7 @@ export default defineComponent({
 .sv {
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: 0.5rem;
   /* Highlight tokens. Light values by default, dark values under html.dark. */
   --hl-tag: #1d4ed8;
@@ -199,11 +235,21 @@ export default defineComponent({
 
 .sv-box {
   position: relative;
-  height: 20rem;
+  flex: 1;
   min-height: 10rem;
+  overflow: hidden;
   background: var(--panel);
   border: 2px solid var(--ink);
   box-shadow: 4px 4px 0 var(--shadow);
+}
+.sv-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.35rem;
+  background: rgb(46 196 182 / 0.35);
+  border-left: 4px solid var(--accent);
+  pointer-events: none;
 }
 .sv-box:focus-within {
   outline: 3px solid var(--accent);
@@ -268,12 +314,6 @@ export default defineComponent({
 :deep(.hljs-comment) { color: var(--hl-comment); font-style: italic; }
 :deep(.hljs-meta) { color: var(--hl-meta); }
 :deep(.hljs-symbol) { color: var(--hl-symbol); }
-
-.sv-hint {
-  margin: 0;
-  font-size: 0.8rem;
-  opacity: 0.75;
-}
 
 .sv-error {
   display: flex;

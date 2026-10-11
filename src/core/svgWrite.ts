@@ -27,7 +27,7 @@ export function shapeToSvg(s: Shape): string {
     case 'polygon':
       return `<polygon points="${s.points.map((p) => `${num(p.x)},${num(p.y)}`).join(' ')}"${paintAttrs(s)} />`
     case 'path':
-      return `<path d="${roundPathData(s.d)}"${paintAttrs(s)} fill-rule="evenodd" />`
+      return `<path d="${roundPathData(s.d)}"${paintAttrs(s)}${s.fillRule === 'nonzero' ? '' : ' fill-rule="evenodd"'} />`
   }
 }
 

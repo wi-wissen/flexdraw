@@ -59,6 +59,10 @@ export default defineComponent({
       void this.rev
       return this.editor.canExport
     },
+    highlightLines(): number[] {
+      void this.rev
+      return this.editor.selection.map((id) => this.editor.lineOfShape(id)).filter((l): l is number => l !== null)
+    },
     showCanvas(): boolean {
       return this.view !== 'code'
     },
@@ -97,6 +101,7 @@ export default defineComponent({
     },
     onEditorChange(origin: Origin) {
       this.rev++
+      if (origin === 'selection') return // selecting never rewrites the source or the saved drawing
       if (origin === 'scene') {
         this.sourceText = this.editor.svg
         this.sourceError = null
@@ -111,6 +116,11 @@ export default defineComponent({
       } catch {
         /* storage full or blocked */
       }
+    },
+    /** Clicking a source line selects the shape that line describes. */
+    onCaretLine(line: number) {
+      const id = this.editor.shapeAtLine(line)
+      if (id && !(this.editor.selection.length === 1 && this.editor.selection[0] === id)) this.editor.select([id])
     },
     onSourceEdit(text: string) {
       this.sourceText = text
@@ -261,7 +271,7 @@ export default defineComponent({
           :title="$t('app.split.hint')" @pointerdown="startSplit" @keydown="onSplitKey"
         />
         <div v-show="showSource" class="min-h-0 min-w-0 flex-1 p-3" data-testid="source-pane">
-          <SourceEditor :model-value="sourceText" :error="sourceError" @edit="onSourceEdit" />
+          <SourceEditor :model-value="sourceText" :error="sourceError" :highlight-lines="highlightLines" @edit="onSourceEdit" @caret-line="onCaretLine" />
         </div>
       </div>
       <PropertiesPanel :editor="editor" :rev="rev" />
