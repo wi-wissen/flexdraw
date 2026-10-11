@@ -1,1 +1,116 @@
-{ "intro": "Draw shapes, change colours and instantly see what your picture looks like as SVG source code.", "start": "Start drawing", "help": "Help" }
+{
+  "intro": "Draw shapes, change colours and instantly see what your picture looks like as SVG source code.",
+  "start": "Start drawing",
+  "github": "View on GitHub",
+  "newTab": "(opens in a new tab)",
+  "hero": {
+    "kicker": "The SVG editor for school",
+    "tagline1": "Draw shapes.",
+    "tagline2": "See the code.",
+    "tagline3": "Get SVG.",
+    "badge": "DRAW • SEE THE CODE • LEARN SVG • "
+  },
+  "stickers": {
+    "openSource": "Open Source",
+    "noAccount": "No account",
+    "svg": "SVG!",
+    "free": "100% free"
+  },
+  "marquee": {
+    "label": "SVG words you will meet",
+    "circle": "circle",
+    "rect": "rectangle",
+    "ellipse": "ellipse",
+    "polygon": "polygon",
+    "path": "path",
+    "fill": "fill colour",
+    "stroke": "outline",
+    "strokeWidth": "line width",
+    "viewBox": "visible area",
+    "points": "corner points"
+  },
+  "motion": {
+    "pause": "Pause animation",
+    "play": "Play animation"
+  },
+  "live": {
+    "kicker": "The big idea",
+    "title": "Draw and instantly see the source code",
+    "text": "Every shape you draw is a line of SVG. Flex Draw shows both at once – change the picture and the code changes, change the code and the picture changes.",
+    "point1": "Each shape = one line of code",
+    "point2": "Colours are hex codes like #ffc93c",
+    "point3": "Edit the code, see the picture"
+  },
+  "demo": {
+    "label": "Animated example of Flex Draw",
+    "caption": "Animation: a smiley is drawn shape by shape. Next to it, the matching SVG source code is typed line by line.",
+    "svgLabel": "Smiley with a box, a star and a squiggle, built from SVG shapes",
+    "file": "smiley.svg",
+    "drawing": "Drawing",
+    "code": "Source code",
+    "liveTag": "LIVE",
+    "pausedTag": "PAUSED",
+    "begin": "Starting: <svg>",
+    "end": "Closing: </svg>",
+    "done": "Done! 7 shapes, 9 lines.",
+    "step": "Shape {n} of {total}: {name}",
+    "shapes": {
+      "box": "rectangle",
+      "face": "circle",
+      "eyeL": "left eye (ellipse)",
+      "eyeR": "right eye (ellipse)",
+      "mouth": "mouth (path)",
+      "star": "star (polygon)",
+      "squiggle": "squiggle (path)"
+    }
+  },
+  "combine": {
+    "kicker": "Shape magic",
+    "title": "Combine shapes",
+    "text": "Two shapes, four ways to merge them into a new one. Perfect for moons, keyholes and doughnuts.",
+    "unite": { "name": "Unite", "text": "Both together become one shape.", "alt": "Square and circle united into one shape" },
+    "intersect": { "name": "Intersect", "text": "Only the overlap remains.", "alt": "Only the overlap of square and circle remains" },
+    "subtract": { "name": "Subtract", "text": "The top shape bites a piece out.", "alt": "The circle cuts a piece out of the square" },
+    "exclude": { "name": "Exclude", "text": "Everything except the overlap.", "alt": "Square and circle without their overlap" }
+  },
+  "files": {
+    "kicker": "Real files",
+    "title": "Your picture as SVG – open and save",
+    "text": "No secret format: your drawing is a real .svg file. It opens in every browser and in lots of other programs.",
+    "fileName": "my-picture.svg",
+    "open": { "title": "Open", "text": "Load an SVG file and keep drawing." },
+    "edit": { "title": "Change", "text": "Move shapes, pick colours, edit the code." },
+    "save": { "title": "Save", "text": "Download it as .svg – done." }
+  },
+  "privacy": {
+    "kicker": "Privacy",
+    "title": "No account. No tracking. Runs in the browser.",
+    "text": "Children just start drawing. Nothing to sign up for, nothing that gets sent away.",
+    "account": { "title": "No account", "text": "No login, no email, no password." },
+    "server": { "title": "No server", "text": "Your drawing stays on your device." },
+    "tracking": { "title": "No tracking", "text": "No cookies, no analytics, no ads." },
+    "offline": { "title": "Almost offline", "text": "Once loaded, it keeps working without the internet." },
+    "open": { "title": "Open source", "text": "All the code is public on GitHub." }
+  },
+  "school": {
+    "kicker": "For teachers",
+    "title": "Built for the classroom",
+    "text": "Made for computer science lessons with children: small, clear and calm enough for a whole class.",
+    "kids": { "title": "For children", "text": "Big buttons, few tools, a friendly design." },
+    "langs": { "title": "German and English", "text": "Switch the language with one click." },
+    "touch": { "title": "Tablets too", "text": "Works with mouse, pen and finger." },
+    "help": { "title": "Help with pictures", "text": "A help page that explains every tool." }
+  },
+  "cta": {
+    "title": "Ready? Draw your first SVG.",
+    "text": "It opens straight away – no install, no account."
+  },
+  "footer": {
+    "about": "A small SVG editor for computer science lessons.",
+    "help": "Help",
+    "credits": "Credits",
+    "github": "View on GitHub",
+    "license": "Open source under the MIT licence",
+    "made": "Made for curious kids and their teachers."
+  }
+}

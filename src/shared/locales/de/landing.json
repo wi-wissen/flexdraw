@@ -1,1 +1,116 @@
-{ "intro": "Zeichne Formen, ändere Farben und sieh sofort, wie das Bild als SVG-Quelltext aussieht.", "start": "Zeichnen starten", "help": "Hilfe" }
+{
+  "intro": "Zeichne Formen, ändere Farben und sieh sofort, wie das Bild als SVG-Quelltext aussieht.",
+  "start": "Zeichnen starten",
+  "github": "Auf GitHub ansehen",
+  "newTab": "(öffnet in neuem Tab)",
+  "hero": {
+    "kicker": "Der SVG-Editor für die Schule",
+    "tagline1": "Zeichne Formen.",
+    "tagline2": "Sieh den Code.",
+    "tagline3": "Versteh SVG.",
+    "badge": "ZEICHNEN • CODE SEHEN • SVG LERNEN • "
+  },
+  "stickers": {
+    "openSource": "Open Source",
+    "noAccount": "Kein Konto",
+    "svg": "SVG!",
+    "free": "100 % kostenlos"
+  },
+  "marquee": {
+    "label": "SVG-Wörter, die du kennenlernst",
+    "circle": "Kreis",
+    "rect": "Rechteck",
+    "ellipse": "Ellipse",
+    "polygon": "Vieleck",
+    "path": "Pfad",
+    "fill": "Füllfarbe",
+    "stroke": "Umriss",
+    "strokeWidth": "Linienstärke",
+    "viewBox": "Sichtbereich",
+    "points": "Eckpunkte"
+  },
+  "motion": {
+    "pause": "Animation anhalten",
+    "play": "Animation abspielen"
+  },
+  "live": {
+    "kicker": "Die große Idee",
+    "title": "Zeichnen und sofort den Quelltext sehen",
+    "text": "Jede Form, die du zeichnest, ist eine Zeile SVG. Flex Draw zeigt beides gleichzeitig – änderst du das Bild, ändert sich der Code. Änderst du den Code, ändert sich das Bild.",
+    "point1": "Jede Form = eine Zeile Code",
+    "point2": "Farben sind Hex-Codes wie #ffc93c",
+    "point3": "Code ändern, Bild sehen"
+  },
+  "demo": {
+    "label": "Animiertes Beispiel von Flex Draw",
+    "caption": "Animation: Ein Smiley wird Form für Form gezeichnet. Daneben erscheint Zeile für Zeile der passende SVG-Quelltext.",
+    "svgLabel": "Smiley mit Kiste, Stern und Kringel, gebaut aus SVG-Formen",
+    "file": "smiley.svg",
+    "drawing": "Zeichnung",
+    "code": "Quelltext",
+    "liveTag": "LIVE",
+    "pausedTag": "PAUSE",
+    "begin": "Start: <svg>",
+    "end": "Schluss: </svg>",
+    "done": "Fertig! 7 Formen, 9 Zeilen.",
+    "step": "Form {n} von {total}: {name}",
+    "shapes": {
+      "box": "Rechteck",
+      "face": "Kreis",
+      "eyeL": "linkes Auge (Ellipse)",
+      "eyeR": "rechtes Auge (Ellipse)",
+      "mouth": "Mund (Pfad)",
+      "star": "Stern (Vieleck)",
+      "squiggle": "Kringel (Pfad)"
+    }
+  },
+  "combine": {
+    "kicker": "Formen-Zauberei",
+    "title": "Formen kombinieren",
+    "text": "Zwei Formen, vier Arten, daraus eine neue zu machen. Perfekt für Monde, Schlüssellöcher und Donuts.",
+    "unite": { "name": "Vereinigen", "text": "Beide zusammen werden eine Form.", "alt": "Quadrat und Kreis zu einer Form vereinigt" },
+    "intersect": { "name": "Schneiden", "text": "Nur die Überlappung bleibt.", "alt": "Nur die Überlappung von Quadrat und Kreis bleibt" },
+    "subtract": { "name": "Abziehen", "text": "Die obere Form beißt ein Stück ab.", "alt": "Der Kreis schneidet ein Stück aus dem Quadrat" },
+    "exclude": { "name": "Ausschließen", "text": "Alles außer der Überlappung.", "alt": "Quadrat und Kreis ohne ihre Überlappung" }
+  },
+  "files": {
+    "kicker": "Echte Dateien",
+    "title": "Dein Bild als SVG – öffnen und speichern",
+    "text": "Kein Geheimformat: Deine Zeichnung ist eine echte .svg-Datei. Sie öffnet sich in jedem Browser und in vielen anderen Programmen.",
+    "fileName": "mein-bild.svg",
+    "open": { "title": "Öffnen", "text": "SVG-Datei laden und weiterzeichnen." },
+    "edit": { "title": "Ändern", "text": "Formen verschieben, Farben wählen, Code bearbeiten." },
+    "save": { "title": "Speichern", "text": "Als .svg herunterladen – fertig." }
+  },
+  "privacy": {
+    "kicker": "Datenschutz",
+    "title": "Ohne Konto. Ohne Tracking. Läuft im Browser.",
+    "text": "Kinder fangen einfach an zu zeichnen. Keine Anmeldung, nichts wird irgendwohin geschickt.",
+    "account": { "title": "Kein Konto", "text": "Kein Login, keine E-Mail, kein Passwort." },
+    "server": { "title": "Kein Server", "text": "Deine Zeichnung bleibt auf deinem Gerät." },
+    "tracking": { "title": "Kein Tracking", "text": "Keine Cookies, keine Statistik, keine Werbung." },
+    "offline": { "title": "Fast offline", "text": "Einmal geladen, läuft es auch ohne Internet weiter." },
+    "open": { "title": "Open Source", "text": "Der ganze Code ist öffentlich auf GitHub." }
+  },
+  "school": {
+    "kicker": "Für Lehrkräfte",
+    "title": "Für den Unterricht gebaut",
+    "text": "Gemacht für den Informatikunterricht mit Kindern: klein, übersichtlich und ruhig genug für eine ganze Klasse.",
+    "kids": { "title": "Für Kinder", "text": "Große Knöpfe, wenige Werkzeuge, freundliches Design." },
+    "langs": { "title": "Deutsch und Englisch", "text": "Sprache mit einem Klick umschalten." },
+    "touch": { "title": "Auch auf Tablets", "text": "Mit Maus, Stift und Finger." },
+    "help": { "title": "Hilfe mit Bildern", "text": "Eine Hilfeseite, die jedes Werkzeug erklärt." }
+  },
+  "cta": {
+    "title": "Bereit? Zeichne dein erstes SVG.",
+    "text": "Es geht sofort los – ohne Installation, ohne Konto."
+  },
+  "footer": {
+    "about": "Ein kleiner SVG-Editor für den Informatikunterricht.",
+    "help": "Hilfe",
+    "credits": "Credits",
+    "github": "Auf GitHub ansehen",
+    "license": "Open Source unter der MIT-Lizenz",
+    "made": "Gemacht für neugierige Kinder und ihre Lehrkräfte."
+  }
+}
