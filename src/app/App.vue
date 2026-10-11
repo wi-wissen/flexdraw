@@ -66,6 +66,12 @@ export default defineComponent({
       return this.view !== 'draw'
     },
   },
+  watch: {
+    view() {
+      // The canvas size changes with the view; re-centre the drawing in the new area.
+      nextTick(() => this.canvas()?.showAll())
+    },
+  },
   mounted() {
     this.editor.onChange(this.onEditorChange)
     const mq = window.matchMedia('(max-width: 800px)')
