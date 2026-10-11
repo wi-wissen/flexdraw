@@ -1,0 +1,9 @@
+{
+  "tagline": "Draw SVG and understand it",
+  "lang": { "label": "Language", "de": "Deutsch", "en": "English", "switchTo": "Switch language to {name}" },
+  "theme": { "label": "Appearance", "light": "Light", "dark": "Dark" },
+  "help": "Help",
+  "app": "Draw",
+  "home": "Home",
+  "skip": "Skip to content"
+}

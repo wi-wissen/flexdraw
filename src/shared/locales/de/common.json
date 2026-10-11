@@ -1,0 +1,9 @@
+{
+  "tagline": "SVG zeichnen und verstehen",
+  "lang": { "label": "Sprache", "de": "Deutsch", "en": "English", "switchTo": "Sprache wechseln zu {name}" },
+  "theme": { "label": "Darstellung", "light": "Hell", "dark": "Dunkel" },
+  "help": "Hilfe",
+  "app": "Zeichnen",
+  "home": "Startseite",
+  "skip": "Zum Inhalt springen"
+}
