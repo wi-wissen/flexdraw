@@ -1,1 +1,148 @@
-{ "title": "Help" }
+{
+  "title": "Help",
+  "intro": "Flex Draw draws shapes and shows you how they look as text. Here you find the basics, with pictures.",
+  "toc": {
+    "label": "Contents",
+    "start": "Getting started",
+    "tools": "The tools",
+    "combine": "Combine shapes",
+    "svg": "What is SVG?",
+    "shortcuts": "Keyboard shortcuts"
+  },
+  "start": {
+    "title": "Getting started",
+    "steps": {
+      "draw": {
+        "title": "1. Draw",
+        "text": "Pick a tool and drag on the canvas to paint something.",
+        "alt": "A yellow rectangle, next to a pencil with a red stroke"
+      },
+      "select": {
+        "title": "2. Select",
+        "text": "Click a shape. A dashed frame shows that it is selected.",
+        "alt": "A teal rectangle with a dashed frame and a mouse pointer"
+      },
+      "colour": {
+        "title": "3. Change the colour",
+        "text": "Click a colour in the palette. The selected shape gets this colour straight away.",
+        "alt": "Three colour swatches, the middle one is chosen, and a teal circle below"
+      },
+      "save": {
+        "title": "4. Save",
+        "text": "Download your picture as an SVG file. Ctrl + S works too.",
+        "alt": "A document labelled SVG and an arrow pointing down"
+      }
+    }
+  },
+  "tools": {
+    "title": "The tools",
+    "items": {
+      "select": {
+        "name": "Select",
+        "text": "Click a shape to select it.",
+        "alt": "A mouse pointer over a shape with a dashed selection frame"
+      },
+      "rect": {
+        "name": "Rectangle",
+        "text": "Drag to draw a rectangle. With Shift it becomes a square.",
+        "alt": "A yellow rectangle with red corner points"
+      },
+      "ellipse": {
+        "name": "Ellipse",
+        "text": "Drag to draw an ellipse. With Shift it becomes a circle.",
+        "alt": "A teal ellipse inside a dashed frame"
+      },
+      "polygon": {
+        "name": "Polygon",
+        "text": "Click point by point. A double-click closes the shape.",
+        "alt": "Points joined by lines to form a polygon"
+      },
+      "freehand": {
+        "name": "Freehand",
+        "text": "Draw freely. Your line becomes a smooth curve.",
+        "alt": "A wavy line that starts with a red dot"
+      },
+      "pan": {
+        "name": "Pan",
+        "text": "Hold the Space bar and drag, or drag with the middle mouse button.",
+        "alt": "Four arrows pointing in all directions"
+      },
+      "zoom": {
+        "name": "Zoom",
+        "text": "Turn the mouse wheel, or use + , − and 100 %.",
+        "alt": "A magnifying glass with a plus sign"
+      }
+    }
+  },
+  "combine": {
+    "title": "Combine shapes",
+    "intro": "Two shapes overlap. One rule decides which parts stay. The square is the first shape, the circle the second.",
+    "before": "Before: a square and a circle overlap",
+    "ops": {
+      "unite": {
+        "name": "Unite",
+        "text": "Both shapes become one single shape. Nothing gets lost.",
+        "alt": "After: the square and the circle as one shared shape"
+      },
+      "intersect": {
+        "name": "Intersect",
+        "text": "Only the part where both shapes overlap stays.",
+        "alt": "After: only the overlap of the square and the circle"
+      },
+      "subtract": {
+        "name": "Subtract",
+        "text": "The circle is cut out of the square. What stays is the square without the circle.",
+        "alt": "After: the square with a piece of circle missing"
+      },
+      "exclude": {
+        "name": "Exclude",
+        "text": "Only the outer parts stay. The overlap disappears.",
+        "alt": "After: the square and the circle without the part where they overlap"
+      }
+    },
+    "teacher": {
+      "title": "For teachers",
+      "text": "The four rules match SQL joins. Each shape is a table, and each overlap is a match:",
+      "items": [
+        "Unite = FULL JOIN (all rows of both tables)",
+        "Intersect = INNER JOIN (only rows with a match)",
+        "Subtract = LEFT JOIN, but only the rows without a match",
+        "Exclude = FULL JOIN without the overlap"
+      ]
+    }
+  },
+  "svg": {
+    "title": "What is SVG?",
+    "text": "SVG stands for “Scalable Vector Graphics”. An SVG picture is not a photo, it is text: every shape is one line of code. A circle, for example, has a centre (cx and cy) and a radius (r). The browser draws the picture from this text, and the editor writes this text for you while you draw.",
+    "codeLabel": "This is the text for this smiley:",
+    "alt": "A drawn smiley: a yellow circle with two eyes and a red mouth"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "caption": "Keyboard shortcuts in the editor",
+    "colKey": "Key",
+    "colAction": "What happens",
+    "mac": "On a Mac, use Cmd (⌘) instead of Ctrl.",
+    "keyNames": {
+      "ctrl": "Ctrl",
+      "shift": "Shift",
+      "esc": "Esc",
+      "del": "Delete",
+      "backspace": "Backspace",
+      "arrows": "Arrow keys"
+    },
+    "rows": {
+      "undo": "Undo",
+      "redo": "Redo",
+      "copy": "Copy",
+      "paste": "Paste",
+      "duplicate": "Duplicate",
+      "selectAll": "Select all",
+      "deselect": "Deselect",
+      "delete": "Delete the selection",
+      "backspaceDelete": "Delete the selection (also with Backspace)",
+      "move": "Move the selection, with Shift in bigger steps",
+      "save": "Save as an SVG file"
+    }
+  }
+}

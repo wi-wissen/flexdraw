@@ -27,7 +27,7 @@ export default defineComponent({
   },
   methods: {
     toggleLang() {
-      setLang(this.$i18n as any, this.otherLang)
+      setLang(this.$i18n, this.otherLang)
     },
     toggleTheme() {
       this.theme = this.otherTheme

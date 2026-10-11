@@ -32,8 +32,10 @@ export function makeI18n() {
   return createI18n({ legacy: true, locale: lang, fallbackLocale: 'en', messages: buildMessages() as any })
 }
 
-export function setLang(i18n: ReturnType<typeof makeI18n>, lang: Lang): void {
-  ;(i18n.global as any).locale = lang
+/** Works with the legacy i18n instance (`this.$i18n`) as well as the plugin object. */
+export function setLang(target: { locale: string } | { global: { locale: string } }, lang: Lang): void {
+  const g = 'global' in target ? target.global : target
+  g.locale = lang
   document.documentElement.lang = lang
   try {
     localStorage.setItem(STORAGE.lang, lang)

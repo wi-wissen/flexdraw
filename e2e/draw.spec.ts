@@ -129,3 +129,16 @@ test('two-way sync between drawing and source', async ({ page }) => {
   await input.fill(text)
   await expect(page.getByTestId('source-error')).toBeHidden()
 })
+
+test('language and theme switch in the app and persist after reload', async ({ page }) => {
+  await page.getByTestId('lang-toggle').click()
+  await expect(page.locator('html')).toHaveAttribute('lang', /^(de|en)$/)
+  const lang = await page.locator('html').getAttribute('lang')
+  await expect(page.getByTestId('act-new')).toHaveText(lang === 'en' ? /New/ : /Neu/)
+  await page.getByTestId('theme-toggle').click()
+  await expect(page.locator('html')).toHaveClass(/dark|^$/)
+  const dark = await page.locator('html').evaluate((e) => e.classList.contains('dark'))
+  await page.reload()
+  expect(await page.locator('html').getAttribute('lang')).toBe(lang)
+  expect(await page.locator('html').evaluate((e) => e.classList.contains('dark'))).toBe(dark)
+})

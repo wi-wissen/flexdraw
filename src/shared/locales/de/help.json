@@ -1,1 +1,148 @@
-{ "title": "Hilfe" }
+{
+  "title": "Hilfe",
+  "intro": "Flex Draw zeichnet Formen und zeigt dir, wie sie als Text aussehen. Hier findest du die Grundlagen mit Bildern.",
+  "toc": {
+    "label": "Inhalt",
+    "start": "Erste Schritte",
+    "tools": "Die Werkzeuge",
+    "combine": "Formen überlagern",
+    "svg": "Was ist SVG?",
+    "shortcuts": "Tastenkürzel"
+  },
+  "start": {
+    "title": "Erste Schritte",
+    "steps": {
+      "draw": {
+        "title": "1. Zeichnen",
+        "text": "Wähle ein Werkzeug und ziehe auf der Fläche, um etwas zu malen.",
+        "alt": "Ein gelbes Rechteck, daneben ein Stift mit einem roten Strich"
+      },
+      "select": {
+        "title": "2. Auswählen",
+        "text": "Klicke auf eine Form. Ein gestrichelter Rahmen zeigt, dass sie ausgewählt ist.",
+        "alt": "Ein türkises Rechteck mit gestricheltem Rahmen und einem Mauszeiger"
+      },
+      "colour": {
+        "title": "3. Farbe ändern",
+        "text": "Klicke in der Palette auf eine Farbe. Die ausgewählte Form bekommt sofort diese Farbe.",
+        "alt": "Drei Farbfelder, das mittlere ist gewählt, darunter ein türkiser Kreis"
+      },
+      "save": {
+        "title": "4. Speichern",
+        "text": "Lade dein Bild als SVG-Datei herunter. Strg + S geht auch.",
+        "alt": "Ein Dokument mit der Aufschrift SVG und einem Pfeil nach unten"
+      }
+    }
+  },
+  "tools": {
+    "title": "Die Werkzeuge",
+    "items": {
+      "select": {
+        "name": "Auswahl",
+        "text": "Klicke eine Form an, um sie auszuwählen.",
+        "alt": "Ein Mauszeiger über einer Form mit gestricheltem Auswahlrahmen"
+      },
+      "rect": {
+        "name": "Rechteck",
+        "text": "Ziehe ein Rechteck auf. Mit Umschalt wird es ein Quadrat.",
+        "alt": "Ein gelbes Rechteck mit roten Eckpunkten"
+      },
+      "ellipse": {
+        "name": "Ellipse",
+        "text": "Ziehe eine Ellipse auf. Mit Umschalt wird sie ein Kreis.",
+        "alt": "Eine türkise Ellipse in einem gestrichelten Rahmen"
+      },
+      "polygon": {
+        "name": "Vieleck",
+        "text": "Klicke Punkt für Punkt. Ein Doppelklick schließt die Form.",
+        "alt": "Punkte, die mit Linien zu einem Vieleck verbunden sind"
+      },
+      "freehand": {
+        "name": "Freihand",
+        "text": "Male frei. Dein Strich wird zu einer glatten Kurve.",
+        "alt": "Eine geschwungene Linie, die mit einem roten Punkt beginnt"
+      },
+      "pan": {
+        "name": "Verschieben",
+        "text": "Halte die Leertaste und ziehe, oder ziehe mit der mittleren Maustaste.",
+        "alt": "Vier Pfeile, die in alle Richtungen zeigen"
+      },
+      "zoom": {
+        "name": "Zoom",
+        "text": "Drehe das Mausrad, oder nutze + , − und 100 %.",
+        "alt": "Eine Lupe mit einem Plus-Zeichen"
+      }
+    }
+  },
+  "combine": {
+    "title": "Formen überlagern",
+    "intro": "Zwei Formen überlappen sich. Eine Regel entscheidet, welche Teile übrig bleiben. Das Quadrat ist die erste Form, der Kreis die zweite.",
+    "before": "Vorher: Quadrat und Kreis überlappen sich",
+    "ops": {
+      "unite": {
+        "name": "Vereinigen",
+        "text": "Beide Formen werden zu einer einzigen Form. Nichts geht verloren.",
+        "alt": "Nachher: Quadrat und Kreis als eine gemeinsame Form"
+      },
+      "intersect": {
+        "name": "Schnittmenge",
+        "text": "Nur der Teil bleibt übrig, in dem sich beide Formen überlappen.",
+        "alt": "Nachher: nur die Überschneidung von Quadrat und Kreis"
+      },
+      "subtract": {
+        "name": "Abziehen",
+        "text": "Der Kreis wird aus dem Quadrat herausgeschnitten. Übrig bleibt das Quadrat ohne den Kreis.",
+        "alt": "Nachher: das Quadrat, aus dem ein Stück Kreis fehlt"
+      },
+      "exclude": {
+        "name": "Ausschließen",
+        "text": "Nur die äußeren Teile bleiben. Die Überschneidung verschwindet.",
+        "alt": "Nachher: Quadrat und Kreis ohne den Teil, wo sie sich überlappen"
+      }
+    },
+    "teacher": {
+      "title": "Für Lehrkräfte",
+      "text": "Die vier Regeln entsprechen SQL-Verknüpfungen. Jede Form ist eine Tabelle, jede Überlappung ein Treffer:",
+      "items": [
+        "Vereinigen = FULL JOIN (alle Zeilen beider Tabellen)",
+        "Schnittmenge = INNER JOIN (nur Zeilen mit Treffer)",
+        "Abziehen = LEFT JOIN, aber nur die Zeilen ohne Treffer",
+        "Ausschließen = FULL JOIN ohne die Überschneidung"
+      ]
+    }
+  },
+  "svg": {
+    "title": "Was ist SVG?",
+    "text": "SVG steht für „Scalable Vector Graphics“. Ein SVG-Bild ist kein Foto, sondern Text: Jede Form steht als eine Zeile im Code. Ein Kreis hat zum Beispiel einen Mittelpunkt (cx und cy) und einen Radius (r). Der Browser malt das Bild aus diesem Text, und der Editor schreibt diesen Text für dich, während du zeichnest.",
+    "codeLabel": "So sieht der Text für diesen Smiley aus:",
+    "alt": "Ein gezeichneter Smiley: gelber Kreis mit zwei Augen und einem roten Mund"
+  },
+  "shortcuts": {
+    "title": "Tastenkürzel",
+    "caption": "Tastenkürzel im Editor",
+    "colKey": "Taste",
+    "colAction": "Was passiert",
+    "mac": "Auf dem Mac nimmst du statt Strg die Taste Cmd (⌘).",
+    "keyNames": {
+      "ctrl": "Strg",
+      "shift": "Umschalt",
+      "esc": "Esc",
+      "del": "Entf",
+      "backspace": "Rück",
+      "arrows": "Pfeiltasten"
+    },
+    "rows": {
+      "undo": "Rückgängig",
+      "redo": "Wiederholen",
+      "copy": "Kopieren",
+      "paste": "Einfügen",
+      "duplicate": "Duplizieren",
+      "selectAll": "Alles auswählen",
+      "deselect": "Auswahl aufheben",
+      "delete": "Auswahl löschen",
+      "backspaceDelete": "Auswahl löschen (auch mit der Rücktaste)",
+      "move": "Auswahl verschieben, mit Umschalt in größeren Schritten",
+      "save": "Als SVG-Datei speichern"
+    }
+  }
+}

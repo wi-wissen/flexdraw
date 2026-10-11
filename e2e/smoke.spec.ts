@@ -7,7 +7,7 @@ test('all three pages load without third-party requests', async ({ page, baseURL
   })
   for (const path of ['/', '/app/', '/help/']) {
     await page.goto(path)
-    await expect(page.locator('header')).toBeVisible()
+    await expect(page.locator('header').first()).toBeVisible()
   }
   expect(foreign).toEqual([])
 })
